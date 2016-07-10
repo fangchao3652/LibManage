@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>test01.html</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script language="JavaScript" src="js/jquery-3.0.0.min.js"></script>
+</head>
+<body>
+<select id="province" name="province">
+    <option value="">请选择....</option>
+    <option value="吉林省">吉林省</option>
+    <option value="辽宁省">辽宁省</option>
+    <option value="山东省">山东省</option>
+</select>
+<select id="city" name="city">
+    <option value="">请选择.....</option>
+</select>
+
+</body>
+<script language="JavaScript">
+    $().ready(function(){
+        $("#province").change(function(){
+         alert(1)
+             //清空city
+            $("#city option:not(:first)").remove();
+            //根据province设置city
+            var prov = $(this).val();
+            $.post("cities.xml",function(data){
+                var $xmlProv = $(data).find("province[name="+prov+"]");
+                var $cities = $xmlProv.find("city");
+                $cities.each(function(i,city){
+                    var $opt = $("<option></option>");
+                    $opt.text($(city).text());
+                    $opt.appendTo($("#city"));
+                });
+            },"xml");
+
+        });
+    })
+
+</script>
+
+</html>
