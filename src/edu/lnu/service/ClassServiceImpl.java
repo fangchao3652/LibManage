@@ -31,4 +31,9 @@ public class ClassServiceImpl implements ClassService {
         }
         return classList;
     }
+
+    @Override
+    public List<Experiment> findExperimentsByCno(int cno) {
+        return   classDao.findExpsByCno(cno);
+    }
 }

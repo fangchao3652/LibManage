@@ -33,7 +33,7 @@
             <div class="con_panel">
                 <div class="con_input">
                     <span>课程名：</span>
-                    <select name="select" id="select_k1" class="xla_k"   >
+                    <select name="select" id="select_k1" class="xla_k">
                         <option value="=">==请选择==</option>
                         <c:forEach items="${requestScope.classList}" var="cla">
                             <option value="${cla.cno}">${cla.name}</option>
@@ -64,24 +64,30 @@
 <script language="JavaScript">
     $().ready(function () {
         $("#select_k1").change(function () {
-            var urlStr="${pageContext.request.contextPath}/AjaxServlet";
+            var urlStr = "${pageContext.request.contextPath}/AjaxServlet";
             //var user = JSON.stringify(new User(101,"阿猫"));
             var cno = $(this).val();
 //调用JQuery提供的Ajax方法
             $.ajax({
-                type:"POST",
-                url:urlStr,
-                data:{cno:cno},
+                type: "POST",
+                url: urlStr,
+                data: {cno: cno},
                 dataType: "json",//此处要设置成jason
-                success: callback});//回调函数
+                success: callback
+            });//回调函数
 
-        function callback(jasonObj)
-        {
-            var str = jasonObj;
-            var obj = JSON.parse(str);//调用Json2.js中提供的JSON解析器来解析成JSONObject
-            alert(obj.errNum);
-        }
+            function callback(jasonObj) {
+                var str = jasonObj;
+                var obj = eval(str);//解析成JSONObject
+                $("#select_k2").empty();//清空原有的
+                for (i = 0; i < obj.length; i++) {
+                    $("#select_k2").append("<option value="+obj[i].eno+">"+obj[i].name+"</option>");
+                }
+
+
+            }
         });
+
     });
     /* function change1() {
      document.getElementById("select_k2").length = 0;

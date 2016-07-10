@@ -1,6 +1,7 @@
 package edu.lnu.service;
 
 import edu.lnu.domain.Class;
+import edu.lnu.domain.Experiment;
 
 import java.util.List;
 
@@ -9,4 +10,7 @@ import java.util.List;
  */
 public interface ClassService extends Service {
     List<Class> findClassesBySno(int sno);
+
+
+    List<Experiment> findExperimentsByCno(int cno);
 }
