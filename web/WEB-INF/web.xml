@@ -48,6 +48,36 @@
         <servlet-name>AjaxServlet</servlet-name>
         <url-pattern>/AjaxServlet</url-pattern>
     </servlet-mapping>
+    <!-- ==========-->
+    <servlet>
+        <servlet-name>DatiServlet</servlet-name>
+        <servlet-class>edu.lnu.web.DatiServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DatiServlet</servlet-name>
+        <url-pattern>/DatiServlet</url-pattern>
+    </servlet-mapping>
+      <!-- ==========-->
+    <servlet>
+        <servlet-name>GetQuestionsServlet</servlet-name>
+        <servlet-class>edu.lnu.web.GetQuestionsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetQuestionsServlet</servlet-name>
+        <url-pattern>/GetQuestionsServlet</url-pattern>
+    </servlet-mapping>
+ <!-- ==========-->
+    <servlet>
+        <servlet-name>PreReportSubServlet</servlet-name>
+        <servlet-class>edu.lnu.web.PreReportSubServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PreReportSubServlet</servlet-name>
+        <url-pattern>/PreReportSubServlet</url-pattern>
+    </servlet-mapping>
+
+
+
     <!--首页-->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

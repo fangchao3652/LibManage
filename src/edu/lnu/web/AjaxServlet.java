@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-/**
+/**select  class
  * Created by Meiling on 2016/7/10.
  */
 @WebServlet(name = "AjaxServlet")

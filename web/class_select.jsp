@@ -30,31 +30,31 @@
             <div class="con_title">
                 <span class="con_title_sp">欢迎登录实验室系统</span>
             </div>
-            <div class="con_panel">
-                <div class="con_input">
-                    <span>课程名：</span>
-                    <select name="select" id="select_k1" class="xla_k">
-                        <option value="=">==请选择==</option>
-                        <c:forEach items="${requestScope.classList}" var="cla">
-                            <option value="${cla.cno}">${cla.name}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <div class="con_input">
-                    <span>课&nbsp;&nbsp;&nbsp;&nbsp;次：</span>
-                    <select name="select"
-                            id="select_k2" class="xla_k" style="width:80px">
-                        <option value="=">==请选择==</option>
-                        <option value="选择品牌">1</option>
-                        <option value="选择品牌1">2</option>
-                        <option value="选择品牌2">3</option>
-                    </select>
-                </div>
-                <div class="con_select">
+            <form action="${pageContext.request.contextPath}/GetQuestionsServlet">
+                <div class="con_panel">
+                    <div class="con_input">
+                        <span>课程名：</span>
+                        <select name="cno" id="select_k1" class="xla_k">
+                            <option value="=">==请选择==</option>
+                            <c:forEach items="${requestScope.classList}" var="cla">
+                                <option value="${cla.cno}">${cla.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="con_input">
+                        <span>课&nbsp;&nbsp;&nbsp;&nbsp;次：</span>
+                        <select name="eno"
+                                id="select_k2" class="xla_k" style="width:80px">
+                            <option value="=">==请选择==</option>
 
+                        </select>
+                    </div>
+                    <div class="con_select">
+
+                    </div>
+                    <input type="submit" value="管       理 " class="submit-btn"/>
                 </div>
-                <input type="submit" value="管       理 " class="submit-btn"/>
-            </div>
+            </form>
         </div>
     </center>
 </div>
@@ -67,7 +67,7 @@
             var urlStr = "${pageContext.request.contextPath}/AjaxServlet";
             //var user = JSON.stringify(new User(101,"阿猫"));
             var cno = $(this).val();
-//调用JQuery提供的Ajax方法
+                    //调用JQuery提供的Ajax方法
             $.ajax({
                 type: "POST",
                 url: urlStr,
@@ -81,7 +81,7 @@
                 var obj = eval(str);//解析成JSONObject
                 $("#select_k2").empty();//清空原有的
                 for (i = 0; i < obj.length; i++) {
-                    $("#select_k2").append("<option value="+obj[i].eno+">"+obj[i].name+"</option>");
+                    $("#select_k2").append("<option value=" + obj[i].eno + ">" + obj[i].name + "</option>");
                 }
 
 

@@ -24,7 +24,7 @@ public class SelectClassServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         int sno = user.getSno();
         //调用service 查找该学生所有的课程
-      List<Class> classList=  classService.findClassesBySno(sno);
+       List<Class> classList=  classService.findClassesBySno(sno);
         //发送到jsp
         request.setAttribute("classList",classList);
 
