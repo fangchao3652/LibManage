@@ -76,6 +76,16 @@
         <url-pattern>/PreReportSubServlet</url-pattern>
     </servlet-mapping>
 
+ <!-- ==========-->
+    <servlet>
+        <servlet-name>ShowResultServlet</servlet-name>
+        <servlet-class>edu.lnu.web.ShowResultServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowResultServlet</servlet-name>
+        <url-pattern>/ShowResultServlet</url-pattern>
+    </servlet-mapping>
+
 
 
     <!--首页-->

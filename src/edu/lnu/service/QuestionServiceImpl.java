@@ -15,4 +15,9 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> findQuestionsByEno(int eno) {
         return dao.findQuestionsByEno(eno);
     }
+
+    @Override
+    public Question findQuestionsById(int id) {
+        return dao.findQuestionsById(id);
+    }
 }

@@ -3,7 +3,6 @@ package edu.lnu.service;
 import edu.lnu.dao.ScoreDao;
 import edu.lnu.domain.Score;
 import edu.lnu.factory.BasicFactory;
-import org.apache.commons.logging.Log;
 
 /**
  * Created by Meiling on 2016/7/11.
@@ -28,6 +27,13 @@ public class ScoreServiceImpl implements ScoreService {
         //有记录才更新
         if (score1 != null) {
             scoreDao.updatePreReport(score, preReport);
+        }else{
+            throw new RuntimeException("请先预习并答题！");
         }
+    }
+
+    @Override
+    public Score findScoreBySnoEno(int sno, int eno) {
+        return  scoreDao.findScoreBySnoEno(sno, eno);
     }
 }

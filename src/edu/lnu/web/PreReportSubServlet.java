@@ -26,7 +26,11 @@ public class PreReportSubServlet extends HttpServlet {
         score.setPreReport(preReport);
         if(score!=null){
             scoreService.updatePreReport(score,preReport);
-            System.out.println("ccccccccdsssssssssssss" + ((Score) request.getSession().getAttribute("score")).getPreReport());
+          // System.out.println("ccccccccdsssssssssssss--------" + ((Score) request.getSession().getAttribute("score")).getPreReport());
+            //转发到结果展示servlet
+            response.sendRedirect(request.getContextPath()+"/ShowResultServlet") ;
+        }else{
+            return;
         }
 
 

@@ -15,7 +15,7 @@ public class ScoreDaoImpl implements ScoreDao {
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
             Score score=runner.query(sql, new BeanHandler<Score>(Score.class), sno, eno);
-            System.out.println(score);
+          //  System.out.println(score);
             return score;
         } catch (Exception e) {
             e.printStackTrace();

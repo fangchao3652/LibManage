@@ -1,9 +1,11 @@
 package edu.lnu.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by Meiling on 2016/7/11.
  */
-public class Question {
+public class Question implements Serializable{
     private int id;
     private int eno;
     private String topic;

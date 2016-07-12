@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface QuestionDao  extends  Dao{
     List<Question> findQuestionsByEno(int eno);
+
+    Question findQuestionsById(int id);
 }
