@@ -57,7 +57,7 @@
         <servlet-name>DatiServlet</servlet-name>
         <url-pattern>/DatiServlet</url-pattern>
     </servlet-mapping>
-      <!-- ==========-->
+    <!-- ==========-->
     <servlet>
         <servlet-name>GetQuestionsServlet</servlet-name>
         <servlet-class>edu.lnu.web.GetQuestionsServlet</servlet-class>
@@ -66,7 +66,7 @@
         <servlet-name>GetQuestionsServlet</servlet-name>
         <url-pattern>/GetQuestionsServlet</url-pattern>
     </servlet-mapping>
- <!-- ==========-->
+    <!-- ==========-->
     <servlet>
         <servlet-name>PreReportSubServlet</servlet-name>
         <servlet-class>edu.lnu.web.PreReportSubServlet</servlet-class>
@@ -76,7 +76,7 @@
         <url-pattern>/PreReportSubServlet</url-pattern>
     </servlet-mapping>
 
- <!-- ==========-->
+    <!-- ==========-->
     <servlet>
         <servlet-name>ShowResultServlet</servlet-name>
         <servlet-class>edu.lnu.web.ShowResultServlet</servlet-class>
@@ -86,6 +86,15 @@
         <url-pattern>/ShowResultServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- ==========-->
+    <servlet>
+        <servlet-name>SubmitCodeReportServlet</servlet-name>
+        <servlet-class>edu.lnu.web.SubmitCodeReportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SubmitCodeReportServlet</servlet-name>
+        <url-pattern>/SubmitCodeReportServlet</url-pattern>
+    </servlet-mapping>
 
 
     <!--首页-->

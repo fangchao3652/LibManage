@@ -57,9 +57,9 @@
 
     欢迎回来,${sessionScope.user.name}
     <a href="${pageContext.request.contextPath}/SelectClassServlet">预习</a>
-    <a href="${pageContext.request.contextPath}/ProdListServlet">作业提交</a>
-    <a href="${pageContext.request.contextPath}/cart.jsp">查看购物车</a>
-    <a href="${pageContext.request.contextPath}/OrderListServlet">查看订单</a>
+    <a href="${pageContext.request.contextPath}/codeReportEdit.jsp">代码及实验报告提交</a>
+    <%--<a href="${pageContext.request.contextPath}/cart.jsp">查看购物车</a>--%>
+    <%--<a href="${pageContext.request.contextPath}/OrderListServlet">查看订单</a>--%>
     <a href="${pageContext.request.contextPath}/LogoutServlet">注销</a>
 </c:if>
 

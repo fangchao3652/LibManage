@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/**学生预习填完实验报告后
  * Created by Meiling on 2016/7/12.
  */
 @WebServlet(name = "ShowResultServlet")
@@ -28,17 +28,19 @@ public class ShowResultServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ScoreService scoreService = BasicFactory.getFactory().getService(ScoreService.class);
         QuestionService questionService = BasicFactory.getFactory().getService(QuestionService.class);
+        if(request.getSession(false)==null){
+            throw  new RuntimeException("请先登录并完成预习");
+        }
         //查找score
 
-
-        User user = (User) request.getSession().getAttribute("user");
         int eno = (int) request.getSession().getAttribute("eno");
+        User user = (User) request.getSession().getAttribute("user");
         Score score = scoreService.findScoreBySnoEno(user.getSno(), eno);
 
 
 
         //得到preResult  [{"id":9, "userAnswer":2},{"id":10, "userAnswer":4},{"id":11, "userAnswer":2},{"id":12, "userAnswer":4}]
-       String preResultstr=score.getPreResult();
+        String preResultstr=score.getPreResult();
         //   String preResultstr = "[{\"id\":9, \"userAnswer\":2},{\"id\":10, \"userAnswer\":4},{\"id\":11, \"userAnswer\":2},{\"id\":12, \"userAnswer\":4}]";
         //解析 preResult 到 List<PreResult>
         JSONArray jsonArray = JSONArray.fromObject(preResultstr);
@@ -47,7 +49,7 @@ public class ShowResultServlet extends HttpServlet {
             JSONObject jsonObject = jsonArray.getJSONObject(i);//{"id":9,"userAnswer":2}
             PreResult preResult = (PreResult) JSONObject.toBean(jsonObject, PreResult.class);
             //现在去封装其他几个字段
-            //--调用service 根据id(题号去查question)
+            //--调用service 根据id(题号）去查question
             Question question = questionService.findQuestionsById(preResult.getId());
             //得到选项json串 并解析它
             String optionStr = question.getOptions();
