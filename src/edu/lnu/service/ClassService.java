@@ -13,4 +13,6 @@ public interface ClassService extends Service {
 
 
     List<Experiment> findExperimentsByCno(int cno);
+
+    List<Class> findClassesByTno(int tno);
 }

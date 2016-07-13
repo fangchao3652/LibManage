@@ -28,4 +28,6 @@ public interface ClassDao extends Dao {
      * @param cno
      */
     List<Experiment> findExpsByCno(int cno);
+
+    List<Class> findClassByTno(int tno);
 }

@@ -30,7 +30,7 @@
             <div class="con_title">
                 <span class="con_title_sp">欢迎登录实验室系统</span>
             </div>
-            <form action="${pageContext.request.contextPath}/GetQuestionsServlet">
+            <form action="${pageContext.request.contextPath}/StudentListServlet">
                 <div class="con_panel">
                     <div class="con_input">
                         <span>课程名：</span>

@@ -96,6 +96,16 @@
         <url-pattern>/SubmitCodeReportServlet</url-pattern>
     </servlet-mapping>
 
+   <!-- ==========-->
+    <servlet>
+        <servlet-name>SelectClassServletTeacher</servlet-name>
+        <servlet-class>edu.lnu.web.SelectClassServletTeacher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SelectClassServletTeacher</servlet-name>
+        <url-pattern>/SelectClassServletTeacher</url-pattern>
+    </servlet-mapping>
+
 
     <!--首页-->
     <welcome-file-list>

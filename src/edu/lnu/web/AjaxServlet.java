@@ -4,7 +4,6 @@ import edu.lnu.domain.Experiment;
 import edu.lnu.factory.BasicFactory;
 import edu.lnu.service.ClassService;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,9 +24,7 @@ public class AjaxServlet extends HttpServlet {
         ClassService service=BasicFactory.getFactory().getService(ClassService.class);
        int  cno=Integer.parseInt(request.getParameter("cno"));
         System.out.println(cno+"  ============!!!!!==============");
-
-
-     List<Experiment> experimentList=service.findExperimentsByCno(cno);
+        List<Experiment> experimentList=service.findExperimentsByCno(cno);
 
         JSONArray jsonArray=JSONArray.fromObject(experimentList);
         System.out.println(jsonArray);

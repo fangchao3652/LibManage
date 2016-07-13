@@ -24,6 +24,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 //        根据role决定调用哪个servie User 还是teacher user 就是student
         String role = request.getParameter("role");
+        System.out.println(role);
         if ("student".equals(role)) {
             //2.调用Service中根据用户名密码查找用户的方法
             User user = service.getUserByNameAndPsw(username, password, role);

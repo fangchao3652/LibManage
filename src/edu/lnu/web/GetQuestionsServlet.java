@@ -3,7 +3,6 @@ package edu.lnu.web;
 import edu.lnu.domain.Question;
 import edu.lnu.factory.BasicFactory;
 import edu.lnu.service.QuestionService;
-import jdk.nashorn.api.scripting.JSObject;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
