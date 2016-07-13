@@ -26,4 +26,6 @@ public interface ScoreDao extends  Dao{
      * @param preReport
      */
     void updatePreReport(Score score, String preReport);
+
+    void updateCodeReport(Score score, String code,String report);
 }

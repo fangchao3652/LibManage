@@ -68,8 +68,11 @@ public class ShowResultServlet extends HttpServlet {
         }
 
 
-        request.setAttribute("preResults",preResults);
-        request.setAttribute("preReport",score.getPreReport());
+        request.setAttribute("preResults",preResults);//预习答题
+        request.setAttribute("preReport",score.getPreReport());//预习报告
+        request.setAttribute("code",score.getCode());//code
+        request.setAttribute("report",score.getReport());//code
+
         request.getRequestDispatcher("/showresult.jsp").forward(request,response);
 
     }

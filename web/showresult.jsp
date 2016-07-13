@@ -11,16 +11,20 @@
 <html>
 <head>
     <title>结果预览</title>
+    <%--ckeditor-Begin--%>
     <script src="ckeditor/ckeditor.js"></script>
     <script src="ckeditor/samples/js/sample.js"></script>
+    <link rel="stylesheet" href="ckeditor/samples/css/samples.css">
+    <link rel="stylesheet" href="ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <%--ckeditor-End--%>
+    <%--代码高亮显示-Begin--%>
     <link rel="stylesheet" href="styles/default.css">
     <script src="js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+    <%--代码高亮显示-End--%>
 
-    <link rel="stylesheet" href="ckeditor/samples/css/samples.css">
-    <link rel="stylesheet" href="ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 </head>
-<body>
+<body >
 <%--${requestScope.preResults[1].isCorrect}1<br>           如果bean用getIsCorrect()这个额可以--%>
 <%--${requestScope.preResults[1].Correct} 2<br>--%>
 <%--${requestScope.preResults[1].correct}3<br>                如果bean用isCorrect这个可以--%>
@@ -41,7 +45,16 @@
 
 </c:forEach>
 <div>
+    预习报告：
     ${requestScope.preReport}
+</div>
+<div>
+    代码：
+    ${requestScope.code}
+</div>
+<div>
+    实验报告：
+    ${requestScope.report}
 </div>
 
 </body>

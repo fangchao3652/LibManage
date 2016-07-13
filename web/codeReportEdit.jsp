@@ -52,7 +52,7 @@
                 代码：<br>
                 <textarea name="code" id="TextArea1" onpaste="return false;"></textarea>
                 实验报告<br>
-                <textarea name="report" id="TextArea1" onpaste="return false;" class="ckeditor"></textarea>
+                <textarea name="report" id="TextArea2" onpaste="return false;" class="ckeditor"></textarea>
                 <br>
                 <input type="submit" value="提	交">
             </form>

@@ -14,8 +14,8 @@ public class ScoreDaoImpl implements ScoreDao {
         String sql = "select * from score where sno = ? and eno = ?";
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
-            Score score=runner.query(sql, new BeanHandler<Score>(Score.class), sno, eno);
-          //  System.out.println(score);
+            Score score = runner.query(sql, new BeanHandler<Score>(Score.class), sno, eno);
+            //  System.out.println(score);
             return score;
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,7 +40,19 @@ public class ScoreDaoImpl implements ScoreDao {
         String sql = "update  score set preReport =? where sno=? and eno=?";
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
-            runner.update(sql,preReport,score.getSno(),score.getEno());
+            runner.update(sql, preReport, score.getSno(), score.getEno());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void updateCodeReport(Score score, String code, String report) {
+        String sql = "update  score set code=?,report =? where sno=? and eno=?";
+        try {
+            QueryRunner runner = new QueryRunner(TransactionManager.getSource());
+            runner.update(sql, code, report, score.getSno(), score.getEno());
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

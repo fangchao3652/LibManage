@@ -36,4 +36,15 @@ public class ScoreServiceImpl implements ScoreService {
     public Score findScoreBySnoEno(int sno, int eno) {
         return  scoreDao.findScoreBySnoEno(sno, eno);
     }
+
+    @Override
+    public void updateCodeReport(Score score, String code, String report) {
+        Score score1 = scoreDao.findScoreBySnoEno(score.getSno(), score.getEno());
+        //有记录才更新
+        if (score1 != null) {
+            scoreDao.updateCodeReport(score,code,report);
+        }else{
+            throw new RuntimeException("请先预习并答题！");
+        }
+    }
 }

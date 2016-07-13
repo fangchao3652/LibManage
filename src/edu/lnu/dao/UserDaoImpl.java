@@ -1,5 +1,6 @@
 package edu.lnu.dao;
 
+import edu.lnu.domain.Teacher;
 import edu.lnu.domain.User;
 import edu.lnu.util.TransactionManager;
 import org.apache.commons.dbutils.QueryRunner;
@@ -10,11 +11,23 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
  */
 public class UserDaoImpl implements UserDao {
     @Override
-    public User finUserByNameAndPsw(String username, String password) {
-        String sql = "select * from student where name = ? and password = ?";
+    public User finUserByNameAndPsw(String username, String password, String limitation) {
+        String sql = "select * from student where name = ? and password = ? and limitation=?";
         try{
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
-            return runner.query(sql, new BeanHandler<User>(User.class) ,username ,password);
+            return runner.query(sql, new BeanHandler<User>(User.class) ,username ,password,limitation);
+        }catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Teacher getTeacherByNameAndPsw(String username, String password, String limitation) {
+        String sql = "select * from teacher where name = ? and password = ? and limitation=?";
+        try{
+            QueryRunner runner = new QueryRunner(TransactionManager.getSource());
+            return runner.query(sql, new BeanHandler<Teacher>(Teacher.class) ,username ,password,limitation);
         }catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

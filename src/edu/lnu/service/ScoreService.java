@@ -18,6 +18,9 @@ public interface ScoreService extends Service {
      */
     @Tran
     void updatePreReport(Score score, String preReport);
-
+    @Tran
+    void updateCodeReport(Score score, String code, String report);
     Score findScoreBySnoEno(int sno, int eno);
+
+
 }
