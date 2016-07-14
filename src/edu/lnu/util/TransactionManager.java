@@ -4,6 +4,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.commons.dbutils.DbUtils;
 
 import javax.sql.DataSource;
+import javax.xml.transform.Source;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
  */
 public class TransactionManager {
     private static DataSource source = new ComboPooledDataSource();
+
 
     //1这种方法 用的是同一个conn所以 多线程的时候会出问题  第一个commit时第二个还没执行完也会被提交//
     //所以用ThreadLocal
@@ -46,7 +48,6 @@ public class TransactionManager {
         // conn.setAutoCommit(false);
         // conn_ThreadLocal.get().setAutoCommit(false);
         flag_ThreadLocal.set(true);
-
         final Connection conn = source.getConnection();
         conn.setAutoCommit(false);
        // System.out.println("autocommit====================="+conn.getAutoCommit());//false

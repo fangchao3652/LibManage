@@ -25,8 +25,9 @@ public class ScoreDaoImpl implements ScoreDao {
 
     @Override
     public void addScore(Score score) {
-        String sql = "insert into score(sno,eno,preResult) values(?,?,?)";
+        String sql = "insert into score(sno,eno,preResult,preStatus) values(?,?,?,1)";
         try {
+
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
             runner.update(sql, score.getSno(), score.getEno(), score.getPreResult());
         } catch (Exception e) {
@@ -37,7 +38,7 @@ public class ScoreDaoImpl implements ScoreDao {
 
     @Override
     public void updatePreReport(Score score, String preReport) {
-        String sql = "update  score set preReport =? where sno=? and eno=?";
+        String sql = "update  score set preReport =?,preStatus=2 where sno=? and eno=?";
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
             runner.update(sql, preReport, score.getSno(), score.getEno());
@@ -53,6 +54,18 @@ public class ScoreDaoImpl implements ScoreDao {
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
             runner.update(sql, code, report, score.getSno(), score.getEno());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void updateScore(float preScore, float evaScore, float reportScore, int sno, int eno) {
+        String sql = "update  score set preScore=?,evaScore =?,reportScore=?,score=?,evaStatus=1 where sno=? and eno=?";
+        try {
+            QueryRunner runner = new QueryRunner(TransactionManager.getSource());
+            runner.update(sql, preScore, evaScore, reportScore, (preScore+evaScore+reportScore)/3,sno,eno);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

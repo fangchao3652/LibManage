@@ -96,7 +96,7 @@
         <url-pattern>/SubmitCodeReportServlet</url-pattern>
     </servlet-mapping>
 
-   <!-- ==========-->
+    <!-- ==========-->
     <servlet>
         <servlet-name>SelectClassServletTeacher</servlet-name>
         <servlet-class>edu.lnu.web.SelectClassServletTeacher</servlet-class>
@@ -104,6 +104,35 @@
     <servlet-mapping>
         <servlet-name>SelectClassServletTeacher</servlet-name>
         <url-pattern>/SelectClassServletTeacher</url-pattern>
+    </servlet-mapping>
+    <!-- ==========-->
+    <servlet>
+        <servlet-name>StudentListServlet</servlet-name>
+        <servlet-class>edu.lnu.web.StudentListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StudentListServlet</servlet-name>
+        <url-pattern>/StudentListServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- ==========-->
+    <servlet>
+        <servlet-name>ShowResultServletTeacher</servlet-name>
+        <servlet-class>edu.lnu.web.ShowResultServletTeacher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowResultServletTeacher</servlet-name>
+        <url-pattern>/ShowResultServletTeacher</url-pattern>
+    </servlet-mapping>
+
+   <!-- ==========-->
+    <servlet>
+        <servlet-name>EvaluateServlet</servlet-name>
+        <servlet-class>edu.lnu.web.EvaluateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EvaluateServlet</servlet-name>
+        <url-pattern>/EvaluateServlet</url-pattern>
     </servlet-mapping>
 
 

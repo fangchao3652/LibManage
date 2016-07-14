@@ -1,9 +1,12 @@
 package edu.lnu.service;
 
 import edu.lnu.dao.UserDao;
+import edu.lnu.domain.Situation;
 import edu.lnu.domain.Teacher;
 import edu.lnu.domain.User;
 import edu.lnu.factory.BasicFactory;
+
+import java.util.List;
 
 /**
  * Created by Meiling on 2016/7/10.
@@ -21,5 +24,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Teacher getTeacherByNameAndPsw(String username, String password, String role) {
         return dao.getTeacherByNameAndPsw(username,password,role);
+    }
+
+    @Override
+    public List<Situation> getSituationsByCnoEno(int cno, int eno) {
+        return dao.getSituationsByCnoEno(cno,eno);
     }
 }

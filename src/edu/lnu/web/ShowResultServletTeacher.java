@@ -10,7 +10,6 @@ import edu.lnu.service.ScoreService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,26 +20,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 学生预习填完实验报告后
- * Created by Meiling on 2016/7/12.
+ * 老师从 学生列表跳转过来
+ * Created by Meiling on 2016/7/14.
  */
-@WebServlet(name = "ShowResultServlet")
-public class ShowResultServlet extends HttpServlet {
+@WebServlet(name = "ShowResultServletTeacher")
+public class ShowResultServletTeacher extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ScoreService scoreService = BasicFactory.getFactory().getService(ScoreService.class);
         QuestionService questionService = BasicFactory.getFactory().getService(QuestionService.class);
-        if (request.getSession(false) == null) {
-            throw new RuntimeException("请先登录并完成预习");
-        }
-        //查找score
+            //获取请求参数
+        //int eno = (int) request.getSession().getAttribute("eno");
+        int sno = Integer.parseInt(request.getParameter("sno"));
+        int eno = Integer.parseInt(request.getParameter("eno"));
+        Score score = scoreService.findScoreBySnoEno(sno, eno);
 
-        int eno = (int) request.getSession().getAttribute("eno");
-        User user = (User) request.getSession().getAttribute("user");
-        Score score = scoreService.findScoreBySnoEno(user.getSno(), eno);
-
-
-        //得到preResult  [{"id":9, "userAnswer":2},{"id":10, "userAnswer":4},{"id":11, "userAnswer":2},{"id":12, "userAnswer":4}]
-        String preResultstr = score.getPreResult();
+        String preResultstr=score.getPreResult();
         //   String preResultstr = "[{\"id\":9, \"userAnswer\":2},{\"id\":10, \"userAnswer\":4},{\"id\":11, \"userAnswer\":2},{\"id\":12, \"userAnswer\":4}]";
         //解析 preResult 到 List<PreResult>
         JSONArray jsonArray = JSONArray.fromObject(preResultstr);
@@ -48,8 +42,6 @@ public class ShowResultServlet extends HttpServlet {
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);//{"id":9,"userAnswer":2}
             PreResult preResult = (PreResult) JSONObject.toBean(jsonObject, PreResult.class);
-            //现在去封装其他几个字段
-            //--调用service 根据id(题号）去查question
             Question question = questionService.findQuestionsById(preResult.getId());
             //得到选项json串 并解析它
             String optionStr = question.getOptions();
@@ -59,21 +51,23 @@ public class ShowResultServlet extends HttpServlet {
                 String option = jsonArrayOPtion.getString(m);
                 options.add(option);
             }
-            preResult.setTopic(question.getTopic());
+
             preResult.setOptions(options);
             preResult.setAnswer(question.getAnswer());
+            preResult.setTopic(question.getTopic());
+
             preResults.add(preResult);
         }
 
+        request.setAttribute("score", score);//成绩
+        request.setAttribute("preResults",preResults);//预习答题
+        /*request.setAttribute("preReport",score.getPreReport());//预习报告
+        request.setAttribute("code",score.getCode());//code
+        request.setAttribute("report",score.getReport());//code*/
+
+        request.getRequestDispatcher("/showresultTeacher.jsp").forward(request,response);
 
 
-        request.setAttribute("preResults", preResults);//预习答题
-
-      request.setAttribute("preReport", score.getPreReport());//预习报告
-        request.setAttribute("code", score.getCode());//code
-        request.setAttribute("report", score.getReport());//report
-
-        request.getRequestDispatcher("/showresult.jsp").forward(request, response);
 
     }
 

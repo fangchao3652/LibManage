@@ -35,7 +35,7 @@
 
                     <form action="${pageContext.request.contextPath}/LoginServlet" method="POST">
                         <div class="con_input">
-                            <span>用户名：</span><input type="text" placeholder="学号/工号" name="username"/>
+                            <span>用户名：</span><input type="text" placeholder="学号/工号" name="username" value="${param.username }"/>
                         </div>
                         <div class="con_input">
                             <span>密&nbsp;&nbsp;&nbsp;&nbsp;码：</span><input type="text" placeholder="密码"

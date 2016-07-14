@@ -28,4 +28,6 @@ public interface ScoreDao extends  Dao{
     void updatePreReport(Score score, String preReport);
 
     void updateCodeReport(Score score, String code,String report);
+
+    void updateScore(float preScore, float evaScore, float reportScore, int sno, int eno);
 }

@@ -45,17 +45,26 @@
 
 </c:forEach>
 <div >
-    预习报告：
-    ${requestScope.preReport}
+    预习报告：<br>
+
+    ${requestScope.score.preReport}
 </div>
 <div>
     代码：
-    ${requestScope.code}
+    ${requestScope.score.code}
 </div>
 <div>
     实验报告：
-    ${requestScope.report}
+    ${requestScope.score.report}
 </div>
-
+<form action="${pageContext.request.contextPath}/EvaluateServlet" method="post">
+    <td> <font color="red">${errmsg }</font></td>
+    <input type="hidden" name="sno" value="${score.sno}">
+    <input type="hidden" name="eno" value="${score.eno}">
+    预习报告成绩：   <input type="text" name="preScore" value="${score.preScore}"><br>
+    课上操作成绩：   <input type="text" name="evaScore" value="${score.evaScore}"><br>
+    实验报告成绩：   <input type="text" name="reportScore" value="${score.reportScore}"><br>
+<input type="submit" value="提交">
+</form>
 </body>
 </html>

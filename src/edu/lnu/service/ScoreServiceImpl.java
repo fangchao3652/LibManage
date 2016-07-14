@@ -47,4 +47,11 @@ public class ScoreServiceImpl implements ScoreService {
             throw new RuntimeException("请先预习并答题！");
         }
     }
+
+
+    @Override
+    public void updateScore(float preScore, float evaScore, float reportScore, int sno, int eno) {
+        scoreDao.updateScore(preScore,evaScore,reportScore,sno,eno);
+    }
+
 }

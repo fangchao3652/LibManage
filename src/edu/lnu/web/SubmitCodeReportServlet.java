@@ -23,14 +23,15 @@ public class SubmitCodeReportServlet extends HttpServlet {
         //更新score 成绩表项
         ScoreService scoreService = BasicFactory.getFactory().getService(ScoreService.class);
         Score score= (Score) request.getSession().getAttribute("score");
-        score.setReport(report);
+
         if(score!=null){
+            score.setReport(report);
             scoreService.updateCodeReport(score,code,report);
             // System.out.println("ccccccccdsssssssssssss--------" + ((Score) request.getSession().getAttribute("score")).getPreReport());
             //转发到结果展示servlet
             response.sendRedirect(request.getContextPath()+"/ShowResultServlet") ;
         }else{
-            return;
+            throw  new RuntimeException("请先预习并填写预习报告");
         }
     }
 
