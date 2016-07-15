@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by Meiling on 2016/6/25.
  */
-public class EncoderFilter implements Filter {
+public class EncoderFilter implements  Filter {
     private FilterConfig filterConfig = null;
     private ServletContext servletContext = null;
     private String encode = null;

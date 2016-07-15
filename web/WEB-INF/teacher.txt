@@ -1,0 +1,8 @@
+/class_select_teacher.jsp
+/showresultTeacher.jsp
+/situationList.jsp
+/teacher.jsp
+/EvaluateServlets
+/SelectClassServletTeacher
+/StudentListServlet
+/ShowResultServletTeacher

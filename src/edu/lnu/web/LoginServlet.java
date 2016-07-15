@@ -44,6 +44,8 @@ public class LoginServlet extends HttpServlet {
                 return;
             }
             request.getSession().setAttribute("user", teacher); //为了后面统一  这里属性名统一用user
+
+
             response.sendRedirect(request.getContextPath() + "/teacher.jsp");
         }
 
