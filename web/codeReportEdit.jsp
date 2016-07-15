@@ -1,14 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Meiling
-  Date: 2016/7/11
-  Time: 15:05
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script language="JavaScript" src="js/jquery-3.0.0.min.js"></script>
     <title>实验报告及代码编辑</title>
     <script src="ckeditor/ckeditor.js"></script>
     <script src="ckeditor/samples/js/sample.js"></script>
@@ -49,6 +45,29 @@
         <%--<div class="grid-container">--%>
         <div class="grid-width-100">
             <form action="${pageContext.request.contextPath}/SubmitCodeReportServlet" method="post">
+
+
+                <div class="con_panel">
+                    <div class="con_input">
+                        <span>课程名：</span>
+                        <select name="cno" id="select_k1" class="xla_k">
+                            <option value="=">==请选择==</option>
+                            <c:forEach items="${requestScope.classList}" var="cla">
+                                <option value="${cla.cno}">${cla.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="con_input">
+                        <span>课&nbsp;&nbsp;&nbsp;&nbsp;次：</span>
+                        <select name="eno"
+                                id="select_k2" class="xla_k" style="width:80px">
+                            <option value="=">==请选择==</option>
+
+                        </select>
+                    </div>
+                </div>
+
+
                 代码：<br>
                 <textarea name="code" id="TextArea1" onpaste="return false;"></textarea>
                 实验报告<br>
@@ -61,4 +80,46 @@
     </div>
 </main>
 </body>
+<script language="JavaScript">
+    $().ready(function () {
+        $("#select_k1").change(function () {
+            var urlStr = "${pageContext.request.contextPath}/AjaxServlet";
+            //var user = JSON.stringify(new User(101,"阿猫"));
+            var cno = $(this).val();
+            //调用JQuery提供的Ajax方法
+            $.ajax({
+                type: "POST",
+                url: urlStr,
+                data: {cno: cno},
+                dataType: "json",//此处要设置成jason
+                success: callback
+            });//回调函数
+
+            function callback(jasonObj) {
+                var str = jasonObj;
+                var obj = eval(str);//解析成JSONObject
+                $("#select_k2").empty();//清空原有的
+                for (i = 0; i < obj.length; i++) {
+                    $("#select_k2").append("<option value=" + obj[i].eno + ">" + obj[i].name + "</option>");
+                }
+
+
+            }
+        });
+
+    });
+    /* function change1() {
+     document.getElementById("select_k2").length = 0;
+     //            var objselect = document.getElementById("select_k1").options(document.getElementById("select_k1").selectedIndex);
+     var index = document.getElementById("select_k1").selectedIndex;
+
+
+     //  alert(index+"=="+
+     for (i = 0; classList.size; i++) {
+
+     document.getElementById("select_k2").add(new Option(classList[i], classList[i]));
+
+     }
+     }*/
+</script>
 </html>

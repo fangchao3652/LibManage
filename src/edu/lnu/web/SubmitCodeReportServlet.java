@@ -1,6 +1,7 @@
 package edu.lnu.web;
 
 import edu.lnu.domain.Score;
+import edu.lnu.domain.User;
 import edu.lnu.factory.BasicFactory;
 import edu.lnu.service.ScoreService;
 
@@ -20,9 +21,13 @@ public class SubmitCodeReportServlet extends HttpServlet {
         //获取code 及报告内容
         String code=request.getParameter("code");
         String report=request.getParameter("report");
+        int cno= Integer.parseInt(request.getParameter("cno"));
+        int eno= Integer.parseInt(request.getParameter("eno"));
+        int sno=((User)request.getSession().getAttribute("user")).getSno();
+        request.getSession().setAttribute("eno", eno);
         //更新score 成绩表项
         ScoreService scoreService = BasicFactory.getFactory().getService(ScoreService.class);
-        Score score= (Score) request.getSession().getAttribute("score");
+         Score score=  scoreService.findScoreBySnoEno(sno,eno);
 
         if(score!=null){
             score.setReport(report);

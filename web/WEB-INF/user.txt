@@ -11,3 +11,5 @@
 /SelectClassServlet
 /ShowResultServlet
 /SubmitCodeReportServlet
+/code.jspx
+/CodeReportEditServlet
