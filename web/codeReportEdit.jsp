@@ -24,13 +24,13 @@
 <nav class="navigation-a">
     <div class="grid-container">
         <ul class="navigation-a-left grid-width-70">
-            <li><a href="http://ckeditor.com">Project Homepage</a></li>
+            <li><a href="${pageContext.request.contextPath}/student.jsp">首页</a></li>
             <li><a href="http://dev.ckeditor.com/">I found a bug</a></li>
             <li><a href="http://github.com/ckeditor/ckeditor-dev" class="icon-pos-right icon-navigation-a-github">Fork
                 CKEditor on GitHub</a></li>
         </ul>
         <ul class="navigation-a-right grid-width-30">
-            <li><a href="http://ckeditor.com/blog-list">${sessionScope.user.name}</a></li>
+            <li><a href="#">${sessionScope.user.name}</a></li>
         </ul>
     </div>
 </nav>
@@ -58,7 +58,7 @@
                         </select>
                     </div>
                     <div class="con_input">
-                        <span>课&nbsp;&nbsp;&nbsp;&nbsp;次：</span>
+                        <span>已预习过的课次：</span>
                         <select name="eno"
                                 id="select_k2" class="xla_k" style="width:80px">
                             <option value="=">==请选择==</option>
@@ -83,8 +83,7 @@
 <script language="JavaScript">
     $().ready(function () {
         $("#select_k1").change(function () {
-            var urlStr = "${pageContext.request.contextPath}/AjaxServlet";
-            //var user = JSON.stringify(new User(101,"阿猫"));
+            var urlStr = "${pageContext.request.contextPath}/AjaxServletPred";
             var cno = $(this).val();
             //调用JQuery提供的Ajax方法
             $.ajax({
@@ -99,10 +98,13 @@
                 var str = jasonObj;
                 var obj = eval(str);//解析成JSONObject
                 $("#select_k2").empty();//清空原有的
-                for (i = 0; i < obj.length; i++) {
-                    $("#select_k2").append("<option value=" + obj[i].eno + ">" + obj[i].name + "</option>");
+                if(obj.length==0){
+                    $("#select_k2").append('<option value=""> 无</option>');
+                }else {
+                    for (i = 0; i < obj.length; i++) {
+                        $("#select_k2").append("<option value=" + obj[i].eno + ">" + obj[i].name + "</option>");
+                    }
                 }
-
 
             }
         });

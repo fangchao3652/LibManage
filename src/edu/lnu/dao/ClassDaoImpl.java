@@ -47,6 +47,27 @@ public class ClassDaoImpl implements ClassDao {
             throw new RuntimeException(e);
         }
     }
+    @Override
+    public List<Experiment> findExpsByCnoUnPred(int sno, int cno) {
+        String sql = "select * from experiment where cno=? and eno not in(select eno from score where sno=?)";
+        try {
+            QueryRunner queryRunner = new QueryRunner(TransactionManager.getSource());
+            return queryRunner.query(sql, new BeanListHandler<Experiment>(Experiment.class), cno,sno);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Experiment> findExperimentsByCnoPred(int sno, int cno) {
+        String sql = "select * from experiment where cno=? and eno   in(select eno from score where sno=?)";
+        try {
+            QueryRunner queryRunner = new QueryRunner(TransactionManager.getSource());
+            return queryRunner.query(sql, new BeanListHandler<Experiment>(Experiment.class), cno,sno);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public List<Class> findClassByTno(int tno) {
@@ -58,4 +79,6 @@ public class ClassDaoImpl implements ClassDao {
             throw new RuntimeException(e);
         }
     }
+
+
 }

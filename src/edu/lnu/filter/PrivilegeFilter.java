@@ -54,7 +54,8 @@ public class PrivilegeFilter implements Filter {
        uri=uri.substring(uri.indexOf(request.getContextPath())+request.getContextPath().length());
         if (teachertnList.contains(uri) || studetnList.contains(uri)) {//需要权限
             if (request.getSession(false) == null || request.getSession().getAttribute("user") == null) {
-                response.getWriter().write("请先登录！");
+
+                response.sendRedirect(request.getContextPath()+"/index.jsp");
             } else {
                 Object o = request.getSession().getAttribute("user");
                 if (studetnList.contains(uri) && o instanceof User) {

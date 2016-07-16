@@ -28,7 +28,7 @@
     <center>
         <div class="con">
             <div class="con_title">
-                <span class="con_title_sp">欢迎登录实验室系统</span>
+                <span class="con_title_sp">选择您要查看的课程</span>
             </div>
             <form action="${pageContext.request.contextPath}/StudentListServlet">
                 <div class="con_panel">

@@ -30,4 +30,9 @@ public interface ClassDao extends Dao {
     List<Experiment> findExpsByCno(int cno);
 
     List<Class> findClassByTno(int tno);
+
+
+    List<Experiment> findExpsByCnoUnPred(int sno, int cno);
+
+    List<Experiment> findExperimentsByCnoPred(int sno, int cno);
 }

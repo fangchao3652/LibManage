@@ -15,4 +15,15 @@ public interface ClassService extends Service {
     List<Experiment> findExperimentsByCno(int cno);
 
     List<Class> findClassesByTno(int tno);
+
+    /**
+     * 查找 所有未预习的
+     *
+     * @param sno
+     * @param cno
+     * @return
+     */
+    List<Experiment> findExperimentsByCnoUnRep(int sno, int cno);
+
+    List<Experiment> findExperimentsByCnoPred(int sno, int cno);
 }

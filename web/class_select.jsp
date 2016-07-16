@@ -18,6 +18,7 @@
     <title>实验室系统</title>
 </head>
 <body>
+
 <div id="header">
     <div class="header_title">
         <span class="title_con">实验室系统</span>
@@ -28,7 +29,7 @@
     <center>
         <div class="con">
             <div class="con_title">
-                <span class="con_title_sp">欢迎登录实验室系统</span>
+                <span class="con_title_sp">选择要预习的课程</span>
             </div>
             <form action="${pageContext.request.contextPath}/GetQuestionsServlet">
                 <div class="con_panel">
@@ -42,7 +43,7 @@
                         </select>
                     </div>
                     <div class="con_input">
-                        <span>课&nbsp;&nbsp;&nbsp;&nbsp;次：</span>
+                        <span>未预习实验课：</span>
                         <select name="eno"
                                 id="select_k2" class="xla_k" style="width:80px">
                             <option value="=">==请选择==</option>
@@ -64,7 +65,7 @@
 <script language="JavaScript">
     $().ready(function () {
         $("#select_k1").change(function () {
-            var urlStr = "${pageContext.request.contextPath}/AjaxServlet";
+            var urlStr = "${pageContext.request.contextPath}/AjaxServletUnpred";
             //var user = JSON.stringify(new User(101,"阿猫"));
             var cno = $(this).val();
                     //调用JQuery提供的Ajax方法

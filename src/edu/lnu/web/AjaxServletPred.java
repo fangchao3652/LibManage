@@ -1,6 +1,7 @@
 package edu.lnu.web;
 
 import edu.lnu.domain.Experiment;
+import edu.lnu.domain.User;
 import edu.lnu.factory.BasicFactory;
 import edu.lnu.service.ClassService;
 import net.sf.json.JSONArray;
@@ -14,20 +15,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-/**select  class
+/**select  class  预习过的
  * Created by Meiling on 2016/7/10.
  */
-@WebServlet(name = "AjaxServlet")
-public class AjaxServlet extends HttpServlet {
+@WebServlet( "/AjaxServletPred")
+public class AjaxServletPred extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ClassService service=BasicFactory.getFactory().getService(ClassService.class);
        int  cno=Integer.parseInt(request.getParameter("cno"));
-
-         List<Experiment> experimentList=service.findExperimentsByCno(cno);//
+       int  sno= ((User)request.getSession().getAttribute("user")).getSno();
+        List<Experiment> experimentList=service.findExperimentsByCnoPred(sno,cno);//该学生 该cno所对应的所有预习过 的Experiment
 
         JSONArray jsonArray=JSONArray.fromObject(experimentList);
-        System.out.println(cno+"AjaxServlet=="+jsonArray);
+        System.out.println(cno+"AjaxServletPred=="+jsonArray);
 
 
         response.setContentType("application/x-json");//需要设置ContentType 为"application/x-json"
