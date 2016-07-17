@@ -23,7 +23,7 @@
         <span class="title_con">实验室系统</span>
     </div>
 </div>
-<c:if test="${sessionScope.user == null}">
+<%--<c:if test="${sessionScope.user == null}">--%>
     <div id="content">
         <center>
             <div class="con">
@@ -52,7 +52,7 @@
             </div>
         </center>
     </div>
-</c:if>
+<%--</c:if>--%>
 <%--
 <c:if test="${sessionScope.user != null}">
 

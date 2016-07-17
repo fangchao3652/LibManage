@@ -3,6 +3,7 @@ package edu.lnu.service;
 import edu.lnu.dao.ClassDao;
 import edu.lnu.domain.Class;
 import edu.lnu.domain.Experiment;
+import edu.lnu.domain.Score;
 import edu.lnu.domain.TakeClass;
 import edu.lnu.factory.BasicFactory;
 
@@ -50,5 +51,10 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public List<Experiment> findExperimentsByCnoPred(int sno, int cno) {
         return classDao.findExperimentsByCnoPred(sno,cno);
+    }
+
+    @Override
+    public List<Score> findExperimentsBySnoTime(int sno) {
+        return classDao.findExperimentsBySnoTime(sno );
     }
 }

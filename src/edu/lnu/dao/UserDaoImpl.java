@@ -16,10 +16,10 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     @Override
     public User finUserByNameAndPsw(String username, String password, String limitation) {
-        String sql = "select * from student where name = ? and password = ? and limitation=?";
+        String sql = "select * from student where name = ? or sno=? and password = ? and limitation=?";
         try{
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
-            return runner.query(sql, new BeanHandler<User>(User.class) ,username ,password,limitation);
+            return runner.query(sql, new BeanHandler<User>(User.class) ,username,username,password,limitation);
         }catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

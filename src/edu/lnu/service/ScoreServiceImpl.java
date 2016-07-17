@@ -54,4 +54,9 @@ public class ScoreServiceImpl implements ScoreService {
         scoreDao.updateScore(preScore,evaScore,reportScore,sno,eno);
     }
 
+    @Override
+    public void updateloginStatus(int sno, int eno) {
+        scoreDao.updateloginStatus(sno,eno);
+    }
+
 }

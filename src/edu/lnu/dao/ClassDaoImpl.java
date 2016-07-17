@@ -2,6 +2,7 @@ package edu.lnu.dao;
 
 import edu.lnu.domain.Class;
 import edu.lnu.domain.Experiment;
+import edu.lnu.domain.Score;
 import edu.lnu.domain.TakeClass;
 import edu.lnu.util.TransactionManager;
 import org.apache.commons.dbutils.QueryRunner;
@@ -64,6 +65,18 @@ public class ClassDaoImpl implements ClassDao {
         try {
             QueryRunner queryRunner = new QueryRunner(TransactionManager.getSource());
             return queryRunner.query(sql, new BeanListHandler<Experiment>(Experiment.class), cno,sno);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Score> findExperimentsBySnoTime(int sno) {
+        //String sql = " select * from score where sno=? and now() between time and date_add(time,interval 180 minute)";
+        String sql = " select * from score where sno=? and eno in (select eno from experiment where now() between time and date_add(time,interval 180 minute))";
+        try {
+            QueryRunner queryRunner = new QueryRunner(TransactionManager.getSource());
+            return queryRunner.query(sql, new BeanListHandler<Score>(Score.class), sno);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

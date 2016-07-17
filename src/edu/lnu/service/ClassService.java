@@ -2,6 +2,7 @@ package edu.lnu.service;
 
 import edu.lnu.domain.Class;
 import edu.lnu.domain.Experiment;
+import edu.lnu.domain.Score;
 
 import java.util.List;
 
@@ -26,4 +27,6 @@ public interface ClassService extends Service {
     List<Experiment> findExperimentsByCnoUnRep(int sno, int cno);
 
     List<Experiment> findExperimentsByCnoPred(int sno, int cno);
+
+    List<Score> findExperimentsBySnoTime(int sno);
 }

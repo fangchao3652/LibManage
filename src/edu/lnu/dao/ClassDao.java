@@ -2,6 +2,7 @@ package edu.lnu.dao;
 
 import edu.lnu.domain.Class;
 import edu.lnu.domain.Experiment;
+import edu.lnu.domain.Score;
 import edu.lnu.domain.TakeClass;
 
 import java.util.List;
@@ -35,4 +36,6 @@ public interface ClassDao extends Dao {
     List<Experiment> findExpsByCnoUnPred(int sno, int cno);
 
     List<Experiment> findExperimentsByCnoPred(int sno, int cno);
+
+    List<Score> findExperimentsBySnoTime(int sno);
 }

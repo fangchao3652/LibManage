@@ -71,4 +71,16 @@ public class ScoreDaoImpl implements ScoreDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void updateloginStatus(int sno, int eno) {
+        String sql = "update  score set  login=1 where sno= ? and eno=?";
+        try {
+            QueryRunner runner = new QueryRunner(TransactionManager.getSource());
+            runner.update(sql, sno,eno);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }

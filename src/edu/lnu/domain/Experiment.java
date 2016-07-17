@@ -1,6 +1,5 @@
 package edu.lnu.domain;
-
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by Meiling on 2016/7/10.
@@ -9,7 +8,7 @@ public class Experiment {
     private  int  eno;
     private  int  lesson;
     private  int  cno;
-    private Date time;
+    private Timestamp time;
     private String name;
 
     public int getEno() {
@@ -36,11 +35,11 @@ public class Experiment {
         this.cno = cno;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 

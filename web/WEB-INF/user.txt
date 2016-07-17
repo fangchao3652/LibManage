@@ -13,3 +13,4 @@
 /SubmitCodeReportServlet
 /code.jspx
 /CodeReportEditServlet
+/QianDaoServlet

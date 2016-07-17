@@ -4,11 +4,40 @@
 <html>
 <head>
     <title>学生首页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script language="JavaScript" src="js/jquery-3.0.0.min.js"></script>
     <script src="ckeditor/ckeditor.js"></script>
     <script src="ckeditor/samples/js/sample.js"></script>
     <link rel="stylesheet" href="ckeditor/samples/css/samples.css">
     <link rel="stylesheet" href="ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+    <script language="JavaScript">
 
+        function qiandao() {
+
+
+             var urlStr = "${pageContext.request.contextPath}/QianDaoServlet";
+               var eno=0;
+                eno= ${scoreList[0].eno};
+             //调用JQuery提供的Ajax方法
+             $.ajax({
+             type: "POST",
+             url: urlStr,
+             data: {eno: eno},
+             dataType: "json",//此处要设置成jason
+             success: callback
+             });//回调函数
+
+             function callback(jasonObj) {
+             var str = jasonObj;
+            // var obj = eval(str);//解析成JSONObject
+                 $("#a1").text('已签到');
+                 $("#a1").removeAttr('onclick');
+                 $("#a1").attr('href',"#");
+                 alert("${experimentList[0].name} 已签到");
+             }
+
+        }
+    </script>
 </head>
 <body>
 
@@ -17,7 +46,15 @@
     <div class="grid-container">
         <c:if test="${sessionScope.user != null}">
             <ul class="navigation-a-left grid-width-70">
-                <li><a href="${pageContext.request.contextPath}/SelectClassServlet" target="_blank">预习</a></li>
+                <c:if test="${scoreList!=null }&& ${scoreList[0].login==0}">
+                    <li><a id="a1" onclick="qiandao()">签到</a></li>
+                </c:if>
+                <c:if test="${scoreList!=null }&& ${scoreList[0].login!=0}">
+                    <li><a  >已签到</a></li>
+                </c:if>
+                <c:if test="${scoreList==null}">
+                    <li><a href="${pageContext.request.contextPath}/SelectClassServlet" target="_blank">预习</a></li>
+                </c:if>
                 <li><a href="${pageContext.request.contextPath}/CodeReportEditServlet" target="_blank">代码及实验报告提交</a>
                 </li>
                 <li><a href="${pageContext.request.contextPath}/LogoutServlet">注销</a></li>
