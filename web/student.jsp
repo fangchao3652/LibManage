@@ -46,11 +46,11 @@
     <div class="grid-container">
         <c:if test="${sessionScope.user != null}">
             <ul class="navigation-a-left grid-width-70">
-                <c:if test="${scoreList!=null }&& ${scoreList[0].login==0}">
+                <c:if test="${scoreList!=null  &&  scoreList[0].login==0}">
                     <li><a id="a1" onclick="qiandao()">签到</a></li>
                 </c:if>
-                <c:if test="${scoreList!=null }&& ${scoreList[0].login!=0}">
-                    <li><a  >已签到</a></li>
+                <c:if test="${scoreList!=null  &&  scoreList[0].login!=0}">
+                    <li><a >已签到</a></li>
                 </c:if>
                 <c:if test="${scoreList==null}">
                     <li><a href="${pageContext.request.contextPath}/SelectClassServlet" target="_blank">预习</a></li>
