@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 老师选择这门课后 查看该实验课学生的实验情况
+ * 老师选择这门课后 查看该实验课学生的实验情况(situation list)
  * Created by Meiling on 2016/7/14.
  */
 @WebServlet(name = "StudentListServlet")
