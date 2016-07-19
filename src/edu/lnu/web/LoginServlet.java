@@ -1,13 +1,13 @@
 package edu.lnu.web;
 
-import edu.lnu.domain.Experiment;
+
 import edu.lnu.domain.Score;
 import edu.lnu.domain.Teacher;
 import edu.lnu.domain.User;
 import edu.lnu.factory.BasicFactory;
 import edu.lnu.service.ClassService;
 import edu.lnu.service.UserService;
-import edu.lnu.util.MD5Utils;
+
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
             //该学生这个时间段 是该显示预习按钮还是 签到按钮
 //根据学号 时间段 看是否能在score查到相应的数据项 若有 说明已经预习需要签到；若在开课时间前则显示预习界面
             List<Score> scoreList = classService.findExperimentsBySnoTime(user.getSno());
-             System.out.println(scoreList);
+            // System.out.println(scoreList);
           if(scoreList!=null&&scoreList.size()>0){
               request.getSession().setAttribute("scoreList", scoreList);
 

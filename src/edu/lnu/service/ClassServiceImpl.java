@@ -35,26 +35,34 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public List<Experiment> findExperimentsByCno(int cno) {
-        return   classDao.findExpsByCno(cno);
+        return classDao.findExpsByCno(cno);
     }
 
     @Override
     public List<Class> findClassesByTno(int tno) {
-        return  classDao.findClassByTno(tno);
+
+        List<Class> classList = classDao.findClassByTno(tno);
+        for (Class c : classList) {
+            List<Experiment> experimentList = classDao.findExpsByCno(c.getCno());
+            c.setList(experimentList);
+        }
+
+
+        return  classList;
     }
 
     @Override
     public List<Experiment> findExperimentsByCnoUnRep(int sno, int cno) {
-       return classDao.findExpsByCnoUnPred(sno,cno);
+        return classDao.findExpsByCnoUnPred(sno, cno);
     }
 
     @Override
     public List<Experiment> findExperimentsByCnoPred(int sno, int cno) {
-        return classDao.findExperimentsByCnoPred(sno,cno);
+        return classDao.findExperimentsByCnoPred(sno, cno);
     }
 
     @Override
     public List<Score> findExperimentsBySnoTime(int sno) {
-        return classDao.findExperimentsBySnoTime(sno );
+        return classDao.findExperimentsBySnoTime(sno);
     }
 }
