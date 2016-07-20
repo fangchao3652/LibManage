@@ -28,14 +28,16 @@ public class EvaStandarServletP extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         List<EvaluateStandard> evaluateStandardList = evaluateService.findEvaByEno(eno);
+      //  response.sendRedirect(request.getContextPath() + "/teacher.jsp");
         if (evaluateService != null) {
             JSONArray jsonArray = JSONArray.fromObject(evaluateStandardList);
-            out.print(" {flag:1,result: " + jsonArray.toString() + "");
+            out.print(" {flag:1,result: " + jsonArray.toString() + "}");
 
         }else{
-            out.print(" {flag:0,result:[]");
+            out.print(" {flag:0,result:[]}");
         }
         out.flush();
+
         //{flag:1,result:[{id:1,eno:14241811,stanDesc:'试验方案结果',options:['合理','适中','不合理']},{id:2,eno:14241811,stanDesc:'试验方案结果',options:['合理','适中','不合理']}]}
 
 

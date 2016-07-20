@@ -15,4 +15,11 @@ public class EvaluateServiceImpl implements EvaluateService {
     public List<EvaluateStandard> findEvaByEno(String eno) {
         return dao.findEvaByEno(eno);
     }
+
+    @Override
+    public void addEvaluateStandars(List<EvaluateStandard> standardList) {
+        for(EvaluateStandard e:standardList){
+            dao.addEvaluateStandar(e);
+        }
+    }
 }

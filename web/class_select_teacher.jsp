@@ -30,7 +30,8 @@
             <div class="con_title">
                 <span class="con_title_sp">选择您要查看的课程</span>
             </div>
-            <form action="${pageContext.request.contextPath}/StudentListServlet">
+            <form name="form1" >
+
                 <div class="con_panel">
                     <div class="con_input">
                         <span>课程名：</span>
@@ -52,7 +53,8 @@
                     <div class="con_select">
 
                     </div>
-                    <input type="submit" value="确   定" class="submit-btn"/>
+                    <input type="submit" value="查看学生信息" class="submit-btn" onClick="showList()"/><br>
+                    <input type="submit" value="提交题库及标准" class="submit-btn" onClick="subQE()"/>
                 </div>
             </form>
         </div>
@@ -62,6 +64,21 @@
 <div style="text-align: center;"></div>
 </body>
 <script language="JavaScript">
+    function showList()
+    {
+        document.form1.action="${pageContext.request.contextPath}/StudentListServlet";
+        document.form1.submit();
+    }
+
+    function subQE()
+    {
+        document.form1.action="${pageContext.request.contextPath}/subQE.jsp";
+        document.form1.submit();
+    }
+
+
+
+
     $().ready(function () {
         $("#select_k1").change(function () {
             var urlStr = "${pageContext.request.contextPath}/AjaxServlet";

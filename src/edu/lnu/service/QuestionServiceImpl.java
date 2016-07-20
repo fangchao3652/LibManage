@@ -20,4 +20,11 @@ public class QuestionServiceImpl implements QuestionService {
     public Question findQuestionsById(int id) {
         return dao.findQuestionsById(id);
     }
+
+    @Override
+    public void addQuestons(List<Question> questionList) {
+        for(Question question:questionList){
+            dao.addQuestion(question);
+        }
+    }
 }

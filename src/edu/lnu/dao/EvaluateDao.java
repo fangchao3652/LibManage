@@ -9,4 +9,10 @@ import java.util.List;
  */
 public interface EvaluateDao  extends  Dao{
     List<EvaluateStandard> findEvaByEno(String eno);
+
+    /**
+     * 添加 单个 评价标准
+     * @param e
+     */
+    void addEvaluateStandar(EvaluateStandard e);
 }

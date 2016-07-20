@@ -22,7 +22,8 @@ public class TextExcel {
     public static List<User> getAllByExcel(String file) {
         List<User> list = new ArrayList<User>();
         try {
-            Workbook rwb = Workbook.getWorkbook(new File(file));
+        Workbook rwb = Workbook.getWorkbook(new File(file));
+            //   Workbook rwb = Workbook.getWorkbook()
             Sheet rs = rwb.getSheet(0);//或者rwb.getSheet(0)
             int clos = rs.getColumns();//得到所有的列
             int rows = rs.getRows();//得到所有的行

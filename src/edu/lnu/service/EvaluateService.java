@@ -1,5 +1,6 @@
 package edu.lnu.service;
 
+import edu.lnu.annotation.Tran;
 import edu.lnu.domain.EvaluateStandard;
 
 import java.util.List;
@@ -10,8 +11,17 @@ import java.util.List;
 public interface EvaluateService extends Service {
     /**
      * 根据 eno 查找 这门实验课 对应的评价标准
-     * @return
+     *
      * @param eno
+     * @return
      */
     List<EvaluateStandard> findEvaByEno(String eno);
+
+    /**
+     * 上传 评价标准
+     *
+     * @param standardList
+     */
+    @Tran
+    void addEvaluateStandars(List<EvaluateStandard> standardList);
 }

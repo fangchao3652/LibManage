@@ -5,11 +5,13 @@ import java.io.Serializable;
 /**
  * Created by Meiling on 2016/7/11.
  */
-public class Question implements Serializable{
+public class Question implements Serializable {
     private int id;
     private int eno;
+    private int quesNum;
     private String topic;
     private String options;
+    private int answer;
 
     public int getAnswer() {
         return answer;
@@ -51,5 +53,11 @@ public class Question implements Serializable{
         this.options = options;
     }
 
-    private int answer;
+    public int getQuesNum() {
+        return quesNum;
+    }
+
+    public void setQuesNum(int quesNum) {
+        this.quesNum = quesNum;
+    }
 }

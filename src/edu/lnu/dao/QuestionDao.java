@@ -11,4 +11,6 @@ public interface QuestionDao  extends  Dao{
     List<Question> findQuestionsByEno(int eno);
 
     Question findQuestionsById(int id);
+
+    void addQuestion(Question question);
 }

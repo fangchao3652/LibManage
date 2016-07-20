@@ -37,4 +37,16 @@ public class QuestionDaoImpl implements QuestionDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void addQuestion(Question question) {
+        String sql = "insert into question values(null,?,?,?,?,?)";
+        try {
+            QueryRunner runner = new QueryRunner(TransactionManager.getSource());
+          runner.update(sql, question.getEno(), question.getQuesNum(), question.getTopic(), question.getAnswer(), question.getOptions());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -22,7 +22,7 @@ public class EvaluateServlet extends HttpServlet {
         //获取 sno  eno
         int sno = Integer.parseInt(request.getParameter("sno"));
         int eno = Integer.parseInt(request.getParameter("eno"));
-
+        System.out.println("from phone================1111111111111111");
         //获取各个成绩
         float preScore;
         float evaScore;

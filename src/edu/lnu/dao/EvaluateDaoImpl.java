@@ -23,4 +23,16 @@ public class EvaluateDaoImpl implements EvaluateDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void addEvaluateStandar(EvaluateStandard ev) {
+        String sql = "insert into evaluate_standard values(null,?,?,?) ";
+        try {
+            QueryRunner runner = new QueryRunner(TransactionManager.getSource());
+           runner.update(sql,  ev.getEno(),ev.getStanDesc(),ev.getOptions());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }
