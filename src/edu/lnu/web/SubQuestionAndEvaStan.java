@@ -30,7 +30,7 @@ public class SubQuestionAndEvaStan extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         QuestionService questionService = BasicFactory.getFactory().getService(QuestionService.class);
         EvaluateService evaluateService = BasicFactory.getFactory().getService(EvaluateService.class);
-            //获取eno
+        //获取eno
         String eno = request.getParameter("eno");
         //上传选择的文件
         try {
@@ -60,8 +60,8 @@ public class SubQuestionAndEvaStan extends HttpServlet {
                 } else {
 
                     //属性名称
-                    String fiedlName = item.getFieldName();// tk :题库  pjzx :评价标准
-                    if ("tk".equals(fiedlName)&&item.getFieldName()!=null&&!"".equals(item.getFieldName())) {//题库
+                    String fiedlName = item.getFieldName();// tk :题库  pjbz :评价标准
+                    if ("tk".equals(fiedlName) && item.getName() != null && !"".equals(item.getName())) {//题库
                         InputStream in = item.getInputStream();
                         //解析 xls 并添加到数据库
                         List<Question> questionList = new ArrayList<Question>();
@@ -69,6 +69,7 @@ public class SubQuestionAndEvaStan extends HttpServlet {
                         Sheet rs = rwb.getSheet(0);//或者rwb.getSheet(0)
                         int clos = rs.getColumns();//得到所有的列
                         int rows = rs.getRows();//得到所有的行
+
                         for (int i = 1; i < rows; i++) {
                             //第一个是列数，第二个是行数
                             String id1 = rs.getCell(0, i).getContents();//默认最左边编号也算一列 所以这里得j++
@@ -89,7 +90,10 @@ public class SubQuestionAndEvaStan extends HttpServlet {
                         questionService.addQuestons(questionList);
 
                         item.delete();
-                    } else if("pjzx".equals(fiedlName)&&item.getFieldName()!=null&&!"".equals(item.getFieldName())){//评价标准
+                        //3.提示成功,回到主页
+                        response.getWriter().write("添加成功!3秒回到主页..");
+                        response.setHeader("Refresh", "3;url=" + request.getContextPath() + "/teacher.jsp");
+                    } else if ("pjbz".equals(fiedlName) && item.getName() != null && !"".equals(item.getName())) {//评价标准
 
 
                         InputStream in = item.getInputStream();
@@ -115,14 +119,13 @@ public class SubQuestionAndEvaStan extends HttpServlet {
                         evaluateService.addEvaluateStandars(standardList);
 
                         item.delete();
+                        //3.提示成功,回到主页
+                        response.getWriter().write("添加成功!3秒回到主页..");
+                        response.setHeader("Refresh", "3;url=" + request.getContextPath() + "/teacher.jsp");
                     }
                 }
             }
 
-
-            //3.提示成功,回到主页
-            response.getWriter().write("添加成功!3秒回到主页..");
-            response.setHeader("Refresh", "3;url=" + request.getContextPath() + "/teacher.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();

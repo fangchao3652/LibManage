@@ -1,6 +1,7 @@
 package edu.lnu.dao;
 
 import edu.lnu.domain.Question;
+import edu.lnu.domain.QuestionDetail;
 import edu.lnu.util.TransactionManager;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -44,6 +45,32 @@ public class QuestionDaoImpl implements QuestionDao {
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
           runner.update(sql, question.getEno(), question.getQuesNum(), question.getTopic(), question.getAnswer(), question.getOptions());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<QuestionDetail> findQuestionsByTno(int tno) {
+        String sql = "select * from question q natural join experiment e where q.eno  in(select eno from experiment where cno in(select cno from class where tno=?))";
+        try {
+            QueryRunner runner1 = new QueryRunner(TransactionManager.getSource());
+
+            return runner1.query(sql, new BeanListHandler<>(QuestionDetail.class), tno);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public QuestionDetail findQuestionDetailById(int id) {
+        String sql = "select * from question q natural join experiment e where id=?";
+        try {
+            QueryRunner runner1 = new QueryRunner(TransactionManager.getSource());
+
+            return runner1.query(sql, new BeanHandler<>(QuestionDetail.class), id);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

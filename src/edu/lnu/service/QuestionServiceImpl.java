@@ -2,6 +2,7 @@ package edu.lnu.service;
 
 import edu.lnu.dao.QuestionDao;
 import edu.lnu.domain.Question;
+import edu.lnu.domain.QuestionDetail;
 import edu.lnu.factory.BasicFactory;
 
 import java.util.List;
@@ -26,5 +27,15 @@ public class QuestionServiceImpl implements QuestionService {
         for(Question question:questionList){
             dao.addQuestion(question);
         }
+    }
+
+    @Override
+    public List<QuestionDetail> findQuestionsByTno(int tno) {
+        return dao.findQuestionsByTno(tno);
+    }
+
+    @Override
+    public QuestionDetail findQuestionDetailById(int  id) {
+        return dao.findQuestionDetailById(id);
     }
 }

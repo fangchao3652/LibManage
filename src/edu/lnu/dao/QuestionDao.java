@@ -1,6 +1,7 @@
 package edu.lnu.dao;
 
 import edu.lnu.domain.Question;
+import edu.lnu.domain.QuestionDetail;
 
 import java.util.List;
 
@@ -13,4 +14,8 @@ public interface QuestionDao  extends  Dao{
     Question findQuestionsById(int id);
 
     void addQuestion(Question question);
+
+    List<QuestionDetail> findQuestionsByTno(int tno);
+
+    QuestionDetail findQuestionDetailById(int id);
 }

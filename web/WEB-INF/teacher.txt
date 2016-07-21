@@ -6,3 +6,4 @@
 /SelectClassServletTeacher
 /StudentListServlet
 /ShowResultServletTeacher
+/QuestionListServletTeacher
