@@ -13,10 +13,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/xgxt_login.css"/>
+    <link rel="stylesheet" href="css/form.css"/>
     <%--表单校验--%>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
     <script type="text/javascript" src="js/Validform_v5.3.2.js"></script>
     <%--表单校验--%>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".loginform").Validform();
+        });
+
+    </script>
     <title>实验室系统</title>
 </head>
 <body>
@@ -35,17 +43,19 @@
             <div class="con_panel">
                 <font color="red">${msg }</font>
 
-                <form action="${pageContext.request.contextPath}/LoginServlet" method="POST" class="demoform">
+                <form action="${pageContext.request.contextPath}/LoginServlet" method="POST" class="loginform">
+                    <input type="text" value="" name="name" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！"/>
+
                     <div class="con_input">
-                        <span>用户名：</span><input type="text" placeholder="学号/工号" name="username"
-                                                nullmsg="请输入用户名!"
+                        <span>用户名：</span><input type="text" placeholder="学号/工号" name="username" nullmsg="请输入用户名!"
                                                 value="${param.username }"/>
+                        <span class="Validform_checktip"></span>
                     </div>
                     <div class="con_input">
-                        <span>密&nbsp;&nbsp;&nbsp;&nbsp;码：</span><input type="text" placeholder="密码"
-                                                                       nullmsg="请输入用户名!"
-                                                                       datatype="*"
-                                                                       name="password"/>
+                        <span>密&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
+                        <input type="text" placeholder="密码" nullmsg="请输入密码" datatype="*" name="password"/>
+                        <span class="Validform_checktip"></span>
+
                     </div>
                     <div class="con_select">
                         <input type="radio" name="role" value="student" checked="checked"/>学生
