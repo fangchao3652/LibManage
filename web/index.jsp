@@ -13,8 +13,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="css/xgxt_login.css"/>
-
-
+    <%--表单校验--%>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/Validform_v5.3.2.js"></script>
+    <%--表单校验--%>
     <title>实验室系统</title>
 </head>
 <body>
@@ -24,34 +26,38 @@
     </div>
 </div>
 <%--<c:if test="${sessionScope.user == null}">--%>
-    <div id="content">
-        <center>
-            <div class="con">
-                <div class="con_title">
-                    <span class="con_title_sp">欢迎登录实验室系统</span>
-                </div>
-                <div class="con_panel">
-                    <font color="red">${msg }</font>
-
-                    <form action="${pageContext.request.contextPath}/LoginServlet" method="POST">
-                        <div class="con_input">
-                            <span>用户名：</span><input type="text" placeholder="学号/工号" name="username" value="${param.username }"/>
-                        </div>
-                        <div class="con_input">
-                            <span>密&nbsp;&nbsp;&nbsp;&nbsp;码：</span><input type="text" placeholder="密码"
-                                                                           name="password"/>
-                        </div>
-                        <div class="con_select">
-                            <input type="radio" name="role" value="student" checked="checked"/>学生
-                            <input type="radio" name="role" value="teacher"/>教师
-                            <input type="radio" name="role" value="admin"/>管理员
-                        </div>
-                        <input type="submit" value="登    录" class="submit-btn"/>
-                    </form>
-                </div>
+<div id="content">
+    <center>
+        <div class="con">
+            <div class="con_title">
+                <span class="con_title_sp">欢迎登录实验室系统</span>
             </div>
-        </center>
-    </div>
+            <div class="con_panel">
+                <font color="red">${msg }</font>
+
+                <form action="${pageContext.request.contextPath}/LoginServlet" method="POST" class="demoform">
+                    <div class="con_input">
+                        <span>用户名：</span><input type="text" placeholder="学号/工号" name="username"
+                                                nullmsg="请输入用户名!"
+                                                value="${param.username }"/>
+                    </div>
+                    <div class="con_input">
+                        <span>密&nbsp;&nbsp;&nbsp;&nbsp;码：</span><input type="text" placeholder="密码"
+                                                                       nullmsg="请输入用户名!"
+                                                                       datatype="*"
+                                                                       name="password"/>
+                    </div>
+                    <div class="con_select">
+                        <input type="radio" name="role" value="student" checked="checked"/>学生
+                        <input type="radio" name="role" value="teacher"/>教师
+                        <input type="radio" name="role" value="admin"/>管理员
+                    </div>
+                    <input type="submit" value="登    录" class="submit-btn"/>
+                </form>
+            </div>
+        </div>
+    </center>
+</div>
 <%--</c:if>--%>
 <%--
 <c:if test="${sessionScope.user != null}">
