@@ -38,4 +38,14 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionDetail findQuestionDetailById(int  id) {
         return dao.findQuestionDetailById(id);
     }
+
+    @Override
+    public void updateQuestion(QuestionDetail detail) {
+        dao.updateQuestion(detail);
+    }
+
+    @Override
+    public void delQuestionByID(String id) {
+        dao.delQuestionByID(id);
+    }
 }

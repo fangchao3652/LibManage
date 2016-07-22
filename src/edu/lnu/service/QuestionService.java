@@ -32,4 +32,13 @@ public interface QuestionService extends Service {
     List<QuestionDetail> findQuestionsByTno(int tno);
 
     QuestionDetail findQuestionDetailById(int id);
+
+    /**
+     * 修改问题
+     * @param detail
+     */
+    @Tran
+    void updateQuestion(QuestionDetail detail);
+    @Tran
+    void delQuestionByID(String id);
 }

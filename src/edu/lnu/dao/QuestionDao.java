@@ -18,4 +18,8 @@ public interface QuestionDao  extends  Dao{
     List<QuestionDetail> findQuestionsByTno(int tno);
 
     QuestionDetail findQuestionDetailById(int id);
+
+    void updateQuestion(QuestionDetail detail);
+
+    void delQuestionByID(String id);
 }

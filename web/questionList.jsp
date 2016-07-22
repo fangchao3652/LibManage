@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<table width="100%" border="1" style="text-align: center">
+<table width="100%" border="1" style="text-align: left">
     <tr>
        <th>课程名</th>
        <th>课程编号</th>

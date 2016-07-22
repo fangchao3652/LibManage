@@ -7,3 +7,7 @@
 /StudentListServlet
 /ShowResultServletTeacher
 /QuestionListServletTeacher
+/EditQuestionServletTeacher
+/AddQuestionServletPre
+/AddQuestionServlet
+/addQuestion.jsp

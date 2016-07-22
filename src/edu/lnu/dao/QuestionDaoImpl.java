@@ -76,4 +76,28 @@ public class QuestionDaoImpl implements QuestionDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void updateQuestion(QuestionDetail detail) {
+        String sql = "update question set topic=?,options=?,answer=? where id=? ";
+        try {
+            QueryRunner runner1 = new QueryRunner(TransactionManager.getSource());
+
+              runner1.update(sql,detail.getTopic(),detail.getOptions(),detail.getAnswer(),detail.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void delQuestionByID(String id) {
+        String sql = "delete from question where id=?";
+        try {
+            QueryRunner queryRunner = new QueryRunner(TransactionManager.getSource());
+            queryRunner.update(sql, id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

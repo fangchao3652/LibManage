@@ -16,12 +16,17 @@ public class QuestionDetail {
     private String topic;
     private String options;
     private int answer;
-    private  int  lesson;
-    private  int  cno;
+    private int lesson;
+    private int cno;
     private Timestamp time;
     private String name;
+    private List<String> optionList;
 
-//将json 数组解析成 list 然后 在jstl 可以直接用
+    public void setOptionList(List<String> optionList) {
+        this.optionList = optionList;
+    }
+
+    //将json 数组解析成 list 然后 在jstl 可以直接用
     public List<String> getOptionList() {
         List<String> optionList = new ArrayList<>();
         JSONArray jsonArray = JSONArray.fromObject(this.getOptions());
