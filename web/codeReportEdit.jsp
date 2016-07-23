@@ -8,10 +8,18 @@
     <title>实验报告及代码编辑</title>
     <script src="ckeditor/ckeditor.js"></script>
     <script src="ckeditor/samples/js/sample.js"></script>
+    <link rel="stylesheet" href="css/form.css"/>
+    <%--表单校验--%>
+    <script type="text/javascript" src="js/Validform_v5.3.2.js"></script>
+    <%--表单校验--%>
     <script type="text/javascript">
         window.onload = function () {
             //    CKEDITOR.replace('code',{toolbarGroups:[{ name: 'insert' }] });   //下面的textarea 不要再写class="ckeditor" 否则会显示两个
             CKEDITOR.replace('code', {toolbar: [['CodeSnippet']], height: 400});
+            $(".subform").Validform({
+
+                tiptype: 4
+            });
         }
     </script>
 
@@ -25,9 +33,7 @@
     <div class="grid-container">
         <ul class="navigation-a-left grid-width-70">
             <li><a href="${pageContext.request.contextPath}/student.jsp">首页</a></li>
-            <li><a href="http://dev.ckeditor.com/">I found a bug</a></li>
-            <li><a href="http://github.com/ckeditor/ckeditor-dev" class="icon-pos-right icon-navigation-a-github">Fork
-                CKEditor on GitHub</a></li>
+
         </ul>
         <ul class="navigation-a-right grid-width-30">
             <li><a href="#">${sessionScope.user.name}</a></li>
@@ -44,14 +50,14 @@
     <div class="adjoined-bottom">
         <%--<div class="grid-container">--%>
         <div class="grid-width-100">
-            <form action="${pageContext.request.contextPath}/SubmitCodeReportServlet" method="post">
+            <form action="${pageContext.request.contextPath}/SubmitCodeReportServlet" method="post" class="subform">
 
 
                 <div class="con_panel">
                     <div class="con_input">
                         <span>课程名：</span>
                         <select name="cno" id="select_k1" class="xla_k">
-                            <option value="=">==请选择==</option>
+                            <option value="">==请选择==</option>
                             <c:forEach items="${requestScope.classList}" var="cla">
                                 <option value="${cla.cno}">${cla.name}</option>
                             </c:forEach>
@@ -59,9 +65,9 @@
                     </div>
                     <div class="con_input">
                         <span>已预习过的课次：</span>
-                        <select name="eno"
+                        <select name="eno" datatype="*" nullmsg="请选择课程"
                                 id="select_k2" class="xla_k" style="width:80px">
-                            <option value="=">==请选择==</option>
+                            <option value="">==请选择==</option>
 
                         </select>
                     </div>
@@ -69,9 +75,9 @@
 
 
                 代码：<br>
-                <textarea name="code" id="TextArea1" onpaste="return false;"></textarea>
-                实验报告<br>
-                <textarea name="report" id="TextArea2" onpaste="return false;" class="ckeditor"></textarea>
+                <textarea name="code" id="TextArea1" onpaste="return false;" datatype="*" nullmsg="请插入代码"></textarea>
+                实验报告：<br>
+                <textarea name="report" id="TextArea2" onpaste="return false;" class="ckeditor"  datatype="*" nullmsg="请填写实验报告"></textarea>
                 <br>
                 <input type="submit" value="提	交">
             </form>

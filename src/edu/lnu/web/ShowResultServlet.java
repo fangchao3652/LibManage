@@ -51,6 +51,9 @@ public class ShowResultServlet extends HttpServlet {
             //现在去封装其他几个字段
             //--调用service 根据id(题号）去查question
             Question question = questionService.findQuestionsById(preResult.getId());
+            if (question == null) {//有时 问题删除了 这里再查就是空
+                continue;
+            }
             //得到选项json串 并解析它
             String optionStr = question.getOptions();
             List<String> options = new ArrayList<>();
@@ -66,10 +69,9 @@ public class ShowResultServlet extends HttpServlet {
         }
 
 
-
         request.setAttribute("preResults", preResults);//预习答题
 
-      request.setAttribute("preReport", score.getPreReport());//预习报告
+        request.setAttribute("preReport", score.getPreReport());//预习报告
         request.setAttribute("code", score.getCode());//code
         request.setAttribute("report", score.getReport());//report
 

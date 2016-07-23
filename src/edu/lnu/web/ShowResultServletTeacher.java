@@ -43,6 +43,9 @@ public class ShowResultServletTeacher extends HttpServlet {
             JSONObject jsonObject = jsonArray.getJSONObject(i);//{"id":9,"userAnswer":2}
             PreResult preResult = (PreResult) JSONObject.toBean(jsonObject, PreResult.class);
             Question question = questionService.findQuestionsById(preResult.getId());
+            if(question==null){
+                continue;
+            }
             //得到选项json串 并解析它
             String optionStr = question.getOptions();
             List<String> options = new ArrayList<>();

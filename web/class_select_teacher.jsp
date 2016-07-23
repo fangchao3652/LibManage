@@ -11,10 +11,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script language="JavaScript" src="js/jquery-3.0.0.min.js"></script>
-
-
     <link rel="stylesheet" href="css/xgxt_login.css"/>
+    <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
     <title>实验室系统</title>
 </head>
 <body>
@@ -30,13 +28,14 @@
             <div class="con_title">
                 <span class="con_title_sp">选择您要查看的课程</span>
             </div>
-            <form name="form1" >
+            <form name="form1" class="forma" onsubmit="false">
 
                 <div class="con_panel">
+                    <span id="msg"> </span>
                     <div class="con_input">
                         <span>课程名：</span>
                         <select name="cno" id="select_k1" class="xla_k">
-                            <option value="=">==请选择==</option>
+                            <option value="">==请选择==</option>
                             <c:forEach items="${requestScope.classList}" var="cla">
                                 <option value="${cla.cno}">${cla.name}</option>
                             </c:forEach>
@@ -45,16 +44,16 @@
                     <div class="con_input">
                         <span>课&nbsp;&nbsp;&nbsp;&nbsp;次：</span>
                         <select name="eno"
-                                id="select_k2" class="xla_k" style="width:80px">
-                            <option value="=">==请选择==</option>
+                                id="select_k2" class="xla_k">
+                            <option value="">==请选择==</option>
 
                         </select>
                     </div>
                     <div class="con_select">
 
                     </div>
-                    <input type="submit" value="查看学生信息" class="submit-btn" onClick="showList()"/><br>
-                    <input type="submit" value="提交题库及标准" class="submit-btn" onClick="subQE()"/>
+                    <input type="button" value="查看学生信息" class="submit-btn" onClick="showList()"/><br>
+                    <input type="button" value="提交题库及标准" class="submit-btn" onClick="subQE()"/>
                 </div>
             </form>
         </div>
@@ -64,19 +63,27 @@
 <div style="text-align: center;"></div>
 </body>
 <script language="JavaScript">
-    function showList()
-    {
-        document.form1.action="${pageContext.request.contextPath}/StudentListServlet";
-        document.form1.submit();
+    function showList() {
+        var eno = $("#select_k2").val()
+        if (eno == null || eno == "") {
+            document.getElementById("msg").innerHTML = "<font color='red'> 请选择课程</font>";
+            return false;
+        } else {
+            document.form1.action = "${pageContext.request.contextPath}/StudentListServlet";
+            document.form1.submit();
+        }
     }
 
-    function subQE()
-    {
-        document.form1.action="${pageContext.request.contextPath}/subQE.jsp";
-        document.form1.submit();
+    function subQE() {
+        var eno = $("#select_k2").val()
+        if (eno == null || eno == "") {
+            document.getElementById("msg").innerHTML = "<font color='red'> 请选择课程</font>";
+            return false;
+        } else {
+            document.form1.action = "${pageContext.request.contextPath}/subQE.jsp";
+            document.form1.submit();
+        }
     }
-
-
 
 
     $().ready(function () {
@@ -84,7 +91,7 @@
             var urlStr = "${pageContext.request.contextPath}/AjaxServlet";
             //var user = JSON.stringify(new User(101,"阿猫"));
             var cno = $(this).val();
-                    //调用JQuery提供的Ajax方法
+            //调用JQuery提供的Ajax方法
             $.ajax({
                 type: "POST",
                 url: urlStr,

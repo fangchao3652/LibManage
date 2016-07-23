@@ -11,10 +11,19 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script language="JavaScript" src="js/jquery-3.0.0.min.js"></script>
-
-
     <link rel="stylesheet" href="css/xgxt_login.css"/>
+    <link rel="stylesheet" href="css/form.css"/>
+    <%--表单校验--%>
+    <script type="text/javascript" src="js/jquery-1.4.2.js"></script>
+    <script type="text/javascript" src="js/Validform_v5.3.2.js"></script>
+    <%--表单校验--%>
+
+
+    <script type="text/javascript">
+
+        $().ready(function () {
+            $(".forma").Validform();
+        });</script>
     <title>实验室系统</title>
 </head>
 <body>
@@ -31,12 +40,12 @@
             <div class="con_title">
                 <span class="con_title_sp">选择要预习的课程</span>
             </div>
-            <form action="${pageContext.request.contextPath}/GetQuestionsServlet">
+            <form action="${pageContext.request.contextPath}/GetQuestionsServlet" class="forma">
                 <div class="con_panel">
                     <div class="con_input">
                         <span>课程名：</span>
-                        <select name="cno" id="select_k1" class="xla_k">
-                            <option value="=">==请选择==</option>
+                        <select name="cno" id="select_k1" class="xla_k" nullmsg="请选择课程" datatype="*">
+                            <option value="">==请选择==</option>
                             <c:forEach items="${requestScope.classList}" var="cla">
                                 <option value="${cla.cno}">${cla.name}</option>
                             </c:forEach>
@@ -44,9 +53,9 @@
                     </div>
                     <div class="con_input">
                         <span>未预习实验课：</span>
-                        <select name="eno"
+                        <select name="eno" nullmsg="请选择课程" datatype="*"
                                 id="select_k2" class="xla_k" style="width:80px">
-                            <option value="=">==请选择==</option>
+                            <option value="">==请选择==</option>
 
                         </select>
                     </div>
@@ -68,7 +77,7 @@
             var urlStr = "${pageContext.request.contextPath}/AjaxServletUnpred";
             //var user = JSON.stringify(new User(101,"阿猫"));
             var cno = $(this).val();
-                    //调用JQuery提供的Ajax方法
+            //调用JQuery提供的Ajax方法
             $.ajax({
                 type: "POST",
                 url: urlStr,

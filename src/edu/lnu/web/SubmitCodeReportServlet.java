@@ -21,7 +21,7 @@ public class SubmitCodeReportServlet extends HttpServlet {
         //获取code 及报告内容
         String code=request.getParameter("code");
         String report=request.getParameter("report");
-        int cno= Integer.parseInt(request.getParameter("cno"));
+        //int cno= Integer.parseInt(request.getParameter("cno"));
         int eno= Integer.parseInt(request.getParameter("eno"));
         int sno=((User)request.getSession().getAttribute("user")).getSno();
         request.getSession().setAttribute("eno", eno);

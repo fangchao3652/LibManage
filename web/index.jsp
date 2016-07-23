@@ -20,12 +20,32 @@
     <%--表单校验--%>
 
     <script type="text/javascript">
-        $(function () {
-            $(".loginform").Validform();
+
+        $().ready(function () {
+            $(".loginform").Validform({
+
+                tiptype: 4
+            });
         });
+
 
     </script>
     <title>实验室系统</title>
+    <style>
+        .loginform li {
+            padding-bottom: 20px;
+        }
+
+        .Validform_checktip {
+            margin-left: 10px;
+        }
+
+        .loginform .label {
+            display: inline-block;
+            width: 70px;
+        }
+
+    </style>
 </head>
 <body>
 <div id="header">
@@ -44,23 +64,40 @@
                 <font color="red">${msg }</font>
 
                 <form action="${pageContext.request.contextPath}/LoginServlet" method="POST" class="loginform">
-                    <input type="text" value="" name="name" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！"/>
 
+                    <%--<ul  >--%>
+                    <%--<li>--%>
+                    <%--<label class="label">用户名</label>--%>
+                    <%--<input type="text" value="${param.username }" name="username" placeholder="学号/工号" class="inputxt"--%>
+                    <%--datatype="*" nullmsg="请输入用户名!">--%>
+                    <%--<span class="Validform_checktip">dddddddddddddd</span>--%>
+                    <%--</li>--%>
+                    <%--<li>--%>
+                    <%--<label class="label">密码</label>--%>
+                    <%--<input type="password" value="${param.username }" name="password"  placeholder="密码" nullmsg="请输入密码"--%>
+                    <%--datatype="*" class="inputxt" >--%>
+                    <%--<span class="Validform_checktip"></span>--%>
+                    <%--</li>--%>
+                    <%--</ul>--%>
                     <div class="con_input">
-                        <span>用户名：</span><input type="text" placeholder="学号/工号" name="username" nullmsg="请输入用户名!"
-                                                value="${param.username }"/>
+                        <span>用户名：</span>
+                        <input type="text" placeholder="学号/工号" name="username" datatype="*" nullmsg="请输入用户名!" sucmsg=""
+                               value="${param.username }"/>
+
+                        <br>
                         <span class="Validform_checktip"></span>
                     </div>
                     <div class="con_input">
                         <span>密&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
-                        <input type="text" placeholder="密码" nullmsg="请输入密码" datatype="*" name="password"/>
+                        <input type="password" placeholder="密码" nullmsg="请输入密码" datatype="*" name="password" sucmsg=""/>
+                        <br>
                         <span class="Validform_checktip"></span>
-
                     </div>
                     <div class="con_select">
-                        <input type="radio" name="role" value="student" checked="checked"/>学生
-                        <input type="radio" name="role" value="teacher"/>教师
-                        <input type="radio" name="role" value="admin"/>管理员
+                        <input type="radio" name="role" value="student" checked="checked" id="s"/><label
+                            for="s">学生</label>
+                        <input type="radio" name="role" value="teacher" id="t"/><label for="t">教师</label>
+                        <input type="radio" name="role" value="admin" id="a"/><label for="a">管理员</label>
                     </div>
                     <input type="submit" value="登    录" class="submit-btn"/>
                 </form>
