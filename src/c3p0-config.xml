@@ -3,6 +3,8 @@
   <default-config>
     <property name="driverClass">com.mysql.jdbc.Driver</property>
     <property name="jdbcUrl">jdbc:mysql:///libmanage?characterEncoding=UTF-8</property>
+    <!--<property name="jdbcUrl">jdbc:mysql://139.129.193.192:3306/libmanage?characterEncoding=UTF-8</property>-->
+    <!--<property name="jdbcUrl">jdbc:mysql://139.129.193.192:3306/libmanage?characterEncoding=UTF-8</property>-->
     <property name="user">root</property>
     <property name="password">admin</property>
   </default-config>

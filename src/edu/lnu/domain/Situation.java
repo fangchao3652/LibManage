@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Created by Meiling on 2016/7/14.
  */
 public class Situation implements Serializable {
-    private int sid;
+    private int sid;// 即sno
     private String name;
     private String sex;
     private String level;

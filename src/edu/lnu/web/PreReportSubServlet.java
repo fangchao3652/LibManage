@@ -23,10 +23,13 @@ public class PreReportSubServlet extends HttpServlet {
         //更新score 数据表项
         ScoreService scoreService = BasicFactory.getFactory().getService(ScoreService.class);
         Score score= (Score) request.getSession().getAttribute("score");
+        if (score == null) {
+            response.getWriter().write("没有题目，没有数据!");
+            return;
+        }
         score.setPreReport(preReport);
         if(score!=null){
             scoreService.updatePreReport(score,preReport);
-          // System.out.println("ccccccccdsssssssssssss--------" + ((Score) request.getSession().getAttribute("score")).getPreReport());
             //转发到结果展示servlet
             response.sendRedirect(request.getContextPath()+"/ShowResultServlet") ;
         }else{

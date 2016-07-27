@@ -28,13 +28,16 @@ public class ShowResultServletTeacher extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ScoreService scoreService = BasicFactory.getFactory().getService(ScoreService.class);
         QuestionService questionService = BasicFactory.getFactory().getService(QuestionService.class);
-            //获取请求参数
+        //获取请求参数
         //int eno = (int) request.getSession().getAttribute("eno");
         int sno = Integer.parseInt(request.getParameter("sno"));
         int eno = Integer.parseInt(request.getParameter("eno"));
         Score score = scoreService.findScoreBySnoEno(sno, eno);
-
-        String preResultstr=score.getPreResult();
+        if (score == null) {
+            response.getWriter().write("没有数据!");
+            return;
+        }
+        String preResultstr = score.getPreResult();
         //   String preResultstr = "[{\"id\":9, \"userAnswer\":2},{\"id\":10, \"userAnswer\":4},{\"id\":11, \"userAnswer\":2},{\"id\":12, \"userAnswer\":4}]";
         //解析 preResult 到 List<PreResult>
         JSONArray jsonArray = JSONArray.fromObject(preResultstr);
@@ -43,7 +46,7 @@ public class ShowResultServletTeacher extends HttpServlet {
             JSONObject jsonObject = jsonArray.getJSONObject(i);//{"id":9,"userAnswer":2}
             PreResult preResult = (PreResult) JSONObject.toBean(jsonObject, PreResult.class);
             Question question = questionService.findQuestionsById(preResult.getId());
-            if(question==null){
+            if (question == null) {
                 continue;
             }
             //得到选项json串 并解析它
@@ -63,13 +66,12 @@ public class ShowResultServletTeacher extends HttpServlet {
         }
 
         request.setAttribute("score", score);//成绩
-        request.setAttribute("preResults",preResults);//预习答题
+        request.setAttribute("preResults", preResults);//预习答题
         /*request.setAttribute("preReport",score.getPreReport());//预习报告
         request.setAttribute("code",score.getCode());//code
         request.setAttribute("report",score.getReport());//code*/
 
-        request.getRequestDispatcher("/showresultTeacher.jsp").forward(request,response);
-
+        request.getRequestDispatcher("/showresultTeacher.jsp").forward(request, response);
 
 
     }
