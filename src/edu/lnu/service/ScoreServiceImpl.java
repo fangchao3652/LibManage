@@ -59,4 +59,17 @@ public class ScoreServiceImpl implements ScoreService {
         scoreDao.updateloginStatus(sno,eno);
     }
 
+    @Override
+    public void addOrUpdateScore(Score score) {
+        //先查找是否存在
+        Score sc=scoreDao.findScoreBySnoEno(score.getSno(),score.getEno());
+        if(sc!=null){
+            //更新
+            scoreDao.updateEvaResultPictures(score);
+        }else{
+            //新插入
+            scoreDao.addScoreByTeacher(score);
+        }
+    }
+
 }

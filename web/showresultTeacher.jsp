@@ -72,6 +72,43 @@
     </c:forEach>
 
 </c:forEach>
+<br>><br>
+课堂评价结果：
+<div>
+    <c:forEach items="${evaluateStandardList}" var="eva">
+        标准：<strong >${eva.stanDesc}</strong><br>
+        <c:forEach items="${eva.optionList}" var="option" varStatus="s">
+            <c:if test="${eva.select==s.index}">
+                <font color="green"> ${option}<br></font>
+            </c:if>
+            <c:if test="${eva.select!=s.index}">
+                ${option}<br>
+            </c:if>
+
+        </c:forEach>
+    </c:forEach>
+
+</div>
+
+<br><br>
+图片-------：
+<div>
+    <table width="100%" style="text-align: center;">
+        <c:forEach items="${pictureList}" var="picture">
+            <tr>
+                <td width="50%"><img src="${pageContext.request.contextPath}/ImgServlet?imgurl=${picture}"
+                                     style="cursor: pointer;"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <hr>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
+
 <div>
     预习报告：<br><br><br>
 

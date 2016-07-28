@@ -65,7 +65,7 @@ public class ScoreDaoImpl implements ScoreDao {
         String sql = "update  score set preScore=?,evaScore =?,reportScore=?,score=?,evaStatus=1 where sno=? and eno=?";
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
-            runner.update(sql, preScore, evaScore, reportScore, (preScore+evaScore+reportScore)/3,sno,eno);
+            runner.update(sql, preScore, evaScore, reportScore, (preScore + evaScore + reportScore) / 3, sno, eno);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -77,7 +77,32 @@ public class ScoreDaoImpl implements ScoreDao {
         String sql = "update  score set  login=1 where sno= ? and eno=?";
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
-            runner.update(sql, sno,eno);
+            runner.update(sql, sno, eno);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void addScoreByTeacher(Score score) {
+        String sql = "insert into score(sno,eno,evaResult,picture) values(?,?,?,?)";
+        try {
+
+            QueryRunner runner = new QueryRunner(TransactionManager.getSource());
+            runner.update(sql, score.getSno(), score.getEno(), score.getEvaResult(), score.getPicture());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void updateEvaResultPictures(Score score) {
+        String sql = "update  score set  evaResult=? , picture=? where sno= ? and eno=?";
+        try {
+            QueryRunner runner = new QueryRunner(TransactionManager.getSource());
+            runner.update(sql, score.getEvaResult(), score.getPicture(), score.getSno(), score.getEno());
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

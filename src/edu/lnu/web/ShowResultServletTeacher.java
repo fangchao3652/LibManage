@@ -1,14 +1,12 @@
 package edu.lnu.web;
 
-import edu.lnu.domain.PreResult;
-import edu.lnu.domain.Question;
-import edu.lnu.domain.Score;
-import edu.lnu.domain.User;
+import edu.lnu.domain.*;
 import edu.lnu.factory.BasicFactory;
 import edu.lnu.service.QuestionService;
 import edu.lnu.service.ScoreService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,6 +35,8 @@ public class ShowResultServletTeacher extends HttpServlet {
             response.getWriter().write("没有数据!");
             return;
         }
+        String evaResult = score.getEvaResult();//[{"eno":14241811,"id":55,"select":0,"options":"['合理','适中','不合理']","stanDesc":"实验方案选择情况"},{"eno":14241811,"id":56,"select":1,"options":"['精通','熟练','良好','不及格']","stanDesc":"实验器材使用情况"},{"eno":14241811,"id":57,"options":"['操作得当','操作及格','操作错误']","stanDesc":"实验实际操作情况"},{"eno":14241811,"id":58,"select":4,"options":"['优秀','良好','中等','及格','不及格']","stanDesc":"实验最终结果情况"}]
+        String picture = score.getPicture();//["url","url1"]
         String preResultstr = score.getPreResult();
         //   String preResultstr = "[{\"id\":9, \"userAnswer\":2},{\"id\":10, \"userAnswer\":4},{\"id\":11, \"userAnswer\":2},{\"id\":12, \"userAnswer\":4}]";
         //解析 preResult 到 List<PreResult>
@@ -64,6 +64,19 @@ public class ShowResultServletTeacher extends HttpServlet {
 
             preResults.add(preResult);
         }
+        //处理 评价结果 图片
+        if (StringUtils.isNotEmpty(evaResult)) {
+            JSONArray evaResultArray = JSONArray.fromObject(evaResult);
+            List<EvaluateStandard> evaluateStandardList = (List<EvaluateStandard>) JSONArray.toCollection(evaResultArray,EvaluateStandard.class);
+            request.setAttribute("evaluateStandardList", evaluateStandardList);//评价
+        }
+
+        if (StringUtils.isNotEmpty(picture)) {
+            JSONArray pictureArry = JSONArray.fromObject(picture);
+            List<String> pictureList = (List<String>) JSONArray.toCollection(pictureArry);
+            request.setAttribute("pictureList", pictureList);//图片
+        }
+
 
         request.setAttribute("score", score);//成绩
         request.setAttribute("preResults", preResults);//预习答题

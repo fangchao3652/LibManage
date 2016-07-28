@@ -18,12 +18,21 @@ public interface ScoreService extends Service {
      */
     @Tran
     void updatePreReport(Score score, String preReport);
+
     @Tran
     void updateCodeReport(Score score, String code, String report);
+
     Score findScoreBySnoEno(int sno, int eno);
 
     @Tran
     void updateScore(float preScore, float evaScore, float reportScore, int sno, int eno);
 
+    @Tran
     void updateloginStatus(int sno, int eno);
+
+    /**老师评价 添加图片 picture eno  sno  evaResult
+     * 已经预习（score表有数据 就更新 否则 新插入一条）
+     */
+    @Tran
+    void addOrUpdateScore(Score score);
 }

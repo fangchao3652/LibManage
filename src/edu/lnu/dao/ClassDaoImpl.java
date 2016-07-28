@@ -61,7 +61,7 @@ public class ClassDaoImpl implements ClassDao {
 
     @Override
     public List<Experiment> findExperimentsByCnoPred(int sno, int cno) {
-        String sql = "select * from experiment where cno=? and eno   in(select eno from score where sno=?)";
+        String sql = "select * from experiment where cno=? and eno   in(select eno from score where sno=? and preStatus!=0)";
         try {
             QueryRunner queryRunner = new QueryRunner(TransactionManager.getSource());
             return queryRunner.query(sql, new BeanListHandler<Experiment>(Experiment.class), cno,sno);
