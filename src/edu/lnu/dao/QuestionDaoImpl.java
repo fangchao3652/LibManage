@@ -6,7 +6,9 @@ import edu.lnu.util.TransactionManager;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -98,6 +100,38 @@ public class QuestionDaoImpl implements QuestionDao {
             queryRunner.update(sql, id);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+
+    @Override
+    public int getRowCount(int tno) {
+        String sql = "select count(*) from question q natural join experiment e where q.eno  in(select eno from experiment where cno in(select cno from class where tno=?))";
+
+        try {
+            QueryRunner runner = new QueryRunner(TransactionManager.getSource());
+
+            return Integer.parseInt(String.valueOf(((Long) runner.query(sql,
+                    new ScalarHandler(),tno))));// 第一行第一列的数据 long型的 要转为 int
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @Override
+    public List<QuestionDetail> getQUestionsBypage(int tno,int from, int rowperpage) {
+        String sql = "select * from question q natural join experiment e where q.eno  in(select eno from experiment where cno in(select cno from class where tno=?)) limit ?,?";
+
+        try {
+            QueryRunner runner = new QueryRunner(TransactionManager.getSource());
+
+            return runner.query(sql, new BeanListHandler<>( QuestionDetail.class),tno,from,
+                    rowperpage);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
         }
     }
 }

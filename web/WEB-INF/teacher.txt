@@ -11,3 +11,4 @@
 /AddQuestionServletPre
 /AddQuestionServlet
 /addQuestion.jsp
+/QuestionListServletTeacherPage

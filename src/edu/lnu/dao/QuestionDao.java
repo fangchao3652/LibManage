@@ -22,4 +22,8 @@ public interface QuestionDao  extends  Dao{
     void updateQuestion(QuestionDetail detail);
 
     void delQuestionByID(String id);
+
+    int getRowCount(int tno);
+
+    List<QuestionDetail> getQUestionsBypage( int tno,int from, int rowperpage);
 }

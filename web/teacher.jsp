@@ -18,7 +18,8 @@
             <ul class="navigation-a-left grid-width-70">
                 <li><a href="${pageContext.request.contextPath}/SelectClassServletTeacher" >选择课程</a></li>
                 <li><a href="${pageContext.request.contextPath}/AddQuestionServletPre" >题库添加</a></li>
-                <li><a href="${pageContext.request.contextPath}/QuestionListServletTeacher" >题库编辑</a></li>
+                <%--<li><a href="${pageContext.request.contextPath}/QuestionListServletTeacher" >题库编辑</a></li>--%>
+                <li><a href="${pageContext.request.contextPath}/QuestionListServletTeacherPage?thispage=1" >题库编辑</a></li>
                 <li><a href="${pageContext.request.contextPath}/LogoutServlet"  >注销</a></li>
 
             </ul>

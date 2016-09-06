@@ -1,6 +1,7 @@
 package edu.lnu.service;
 
 import edu.lnu.annotation.Tran;
+import edu.lnu.domain.Page;
 import edu.lnu.domain.Question;
 import edu.lnu.domain.QuestionDetail;
 
@@ -41,4 +42,13 @@ public interface QuestionService extends Service {
     void updateQuestion(QuestionDetail detail);
     @Tran
     void delQuestionByID(String id);
+
+    /**
+     *
+     * @param tno
+     * @param thispage
+     * @param i  每页多少条数据
+     * @return
+     */
+    Page findQuestionsByTnoPage(int tno, int thispage, int i);
 }

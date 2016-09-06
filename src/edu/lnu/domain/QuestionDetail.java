@@ -1,6 +1,7 @@
 package edu.lnu.domain;
 
 import net.sf.json.JSONArray;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class QuestionDetail {
     private int lesson;
     private int cno;
     private Timestamp time;
-    private String name;
+    private String name;//实验课名
     private List<String> optionList;
 
     public void setOptionList(List<String> optionList) {
@@ -29,6 +30,9 @@ public class QuestionDetail {
     //将json 数组解析成 list 然后 在jstl 可以直接用
     public List<String> getOptionList() {
         List<String> optionList = new ArrayList<>();
+        if(StringUtils.isEmpty(this.getOptions())){
+            this.setOptions("[]");
+        }
         JSONArray jsonArray = JSONArray.fromObject(this.getOptions());
         for (int i = 0; i < jsonArray.size(); i++) {
             String option = jsonArray.getString(i);
