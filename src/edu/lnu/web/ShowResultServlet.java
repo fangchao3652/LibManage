@@ -45,11 +45,14 @@ public class ShowResultServlet extends HttpServlet {
         //解析 preResult 到 List<PreResult>
         JSONArray jsonArray = JSONArray.fromObject(preResultstr);
         List<PreResult> preResults = new ArrayList<>();
-        for (int i = 0; i < jsonArray.size(); i++) {
+        for (int i = 0; i < jsonArray.size(); i++) {  //显示答题情况
             JSONObject jsonObject = jsonArray.getJSONObject(i);//{"id":9,"userAnswer":2}
             PreResult preResult = (PreResult) JSONObject.toBean(jsonObject, PreResult.class);
             //现在去封装其他几个字段
             //--调用service 根据id(题号）去查question
+            if(preResult==null){
+                continue;
+            }
             Question question = questionService.findQuestionsById(preResult.getId());
             if (question == null) {//有时 问题删除了 这里再查就是空
                 continue;
@@ -70,11 +73,9 @@ public class ShowResultServlet extends HttpServlet {
 
 
         request.setAttribute("preResults", preResults);//预习答题
-
         request.setAttribute("preReport", score.getPreReport());//预习报告
         request.setAttribute("code", score.getCode());//code
         request.setAttribute("report", score.getReport());//report
-
         request.getRequestDispatcher("/showresult.jsp").forward(request, response);
 
     }

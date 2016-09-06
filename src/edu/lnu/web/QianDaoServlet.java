@@ -24,7 +24,7 @@ public class QianDaoServlet extends HttpServlet {
         //获取学号 及eno
         int sno = ((User) request.getSession().getAttribute("user")).getSno();
         int eno = Integer.parseInt(request.getParameter("eno"));
-        //更新 签到状态
+        //更新 签到状态（没预习 score 表中没有的 不显示签到选项）
         service.updateloginStatus(sno, eno);
         System.out.println("eno=已经更新="+eno);
 

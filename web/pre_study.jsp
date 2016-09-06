@@ -20,10 +20,9 @@
 <nav class="navigation-a">
     <div class="grid-container">
         <ul class="navigation-a-left grid-width-70">
-            <li><a href="http://ckeditor.com">Project Homepage</a></li>
-            <li><a href="http://dev.ckeditor.com/">I found a bug</a></li>
-            <li><a href="http://github.com/ckeditor/ckeditor-dev" class="icon-pos-right icon-navigation-a-github">Fork CKEditor on GitHub</a></li>
-        </ul>
+                <li><a href="${pageContext.request.contextPath}/SelectClassServlet" >预习</a></li>
+            <li><a href="${pageContext.request.contextPath}/CodeReportEditServlet"  >代码及实验报告提交</a>
+            </li> </ul>
         <ul class="navigation-a-right grid-width-30">
             <li><a href="http://ckeditor.com/blog-list">${sessionScope.user.name}</a></li>
         </ul>

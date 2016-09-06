@@ -1,6 +1,7 @@
 package edu.lnu.web;
 
 import edu.lnu.domain.Score;
+import edu.lnu.domain.User;
 import edu.lnu.factory.BasicFactory;
 import edu.lnu.service.ScoreService;
 
@@ -24,8 +25,15 @@ public class PreReportSubServlet extends HttpServlet {
         ScoreService scoreService = BasicFactory.getFactory().getService(ScoreService.class);
         Score score= (Score) request.getSession().getAttribute("score");
         if (score == null) {
-            response.getWriter().write("没有题目，没有数据!");
-            return;
+           /* response.getWriter().write("没有题目，没有数据!");
+            return;*/
+             score=new Score();
+            User user = (User) request.getSession().getAttribute("user");
+            int eno = (int) request.getSession().getAttribute("eno");
+            int sno = user.getSno();
+            score.setSno(sno);
+            score.setEno(eno);
+            scoreService.addScore( score);
         }
         score.setPreReport(preReport);
         if(score!=null){

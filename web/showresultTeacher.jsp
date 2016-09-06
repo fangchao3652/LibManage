@@ -96,7 +96,7 @@
     <table width="100%" style="text-align: center;">
         <c:forEach items="${pictureList}" var="picture">
             <tr>
-                <td width="50%"><img src="${pageContext.request.contextPath}/ImgServlet?imgurl=${picture}"
+                <td width="80%"><img width="500" src="${pageContext.request.contextPath}/ImgServlet?imgurl=${picture}"
                                      style="cursor: pointer;"/>
                 </td>
             </tr>

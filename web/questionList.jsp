@@ -8,12 +8,30 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
+<head><script src="ckeditor/ckeditor.js"></script>
+    <script src="ckeditor/samples/js/sample.js"></script>
+    <link rel="stylesheet" href="ckeditor/samples/css/samples.css">
+    <link rel="stylesheet" href="ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
     <title>题库列表</title>
 </head>
 <body>
+<nav class="navigation-a">
+    <div class="grid-container">
+        <c:if test="${sessionScope.user != null}">
+            <ul class="navigation-a-left grid-width-70">
+                <li><a href="${pageContext.request.contextPath}/SelectClassServletTeacher" >选择课程</a></li>
+                <li><a href="${pageContext.request.contextPath}/AddQuestionServletPre" >题库添加</a></li>
+                <li><a href="${pageContext.request.contextPath}/QuestionListServletTeacher" >题库编辑</a></li>
+                <li><a href="${pageContext.request.contextPath}/LogoutServlet"  >注销</a></li>
 
-<table width="100%" border="1" style="text-align: left">
+            </ul>
+            <ul class="navigation-a-right grid-width-30">
+                <li><a href="#">欢迎回来,${sessionScope.user.name}</a></li>
+            </ul>
+        </c:if>
+    </div>
+</nav>
+<table width="100%" border="1" style="text-align: left;margin-top: 31px"   >
     <tr>
        <th>课程名</th>
        <th>课程编号</th>

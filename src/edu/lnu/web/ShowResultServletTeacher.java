@@ -45,6 +45,9 @@ public class ShowResultServletTeacher extends HttpServlet {
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);//{"id":9,"userAnswer":2}
             PreResult preResult = (PreResult) JSONObject.toBean(jsonObject, PreResult.class);
+            if(preResult==null){
+                continue;
+            }
             Question question = questionService.findQuestionsById(preResult.getId());
             if (question == null) {
                 continue;

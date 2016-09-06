@@ -27,7 +27,6 @@ public class ScoreDaoImpl implements ScoreDao {
     public void addScore(Score score) {
         String sql = "insert into score(sno,eno,preResult,preStatus) values(?,?,?,1)";
         try {
-
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
             runner.update(sql, score.getSno(), score.getEno(), score.getPreResult());
         } catch (Exception e) {
