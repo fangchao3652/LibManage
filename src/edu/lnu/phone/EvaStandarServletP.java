@@ -31,6 +31,7 @@ public class EvaStandarServletP extends HttpServlet {
       //  response.sendRedirect(request.getContextPath() + "/teacher.jsp");
         if (evaluateStandardList != null) {
             JSONArray jsonArray = JSONArray.fromObject(evaluateStandardList);
+            System.out.println("/EvaStandarServletP---->"+jsonArray);
             out.print(" {flag:1,result: " + jsonArray.toString() + "}");
 
         }else{

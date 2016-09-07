@@ -27,7 +27,7 @@ public class StudentListServletP extends HttpServlet {
         //获取实验课号 和课程号
         int eno = Integer.parseInt(request.getParameter("eno"));
         int cno = Integer.parseInt(request.getParameter("cno"));
-        System.out.println("StudentListServletP==="+eno+"=="+cno );
+        System.out.println("StudentListServletP==eno="+eno+"=cno:"+cno );
         //调用service 查找 这节课的所有出勤情况
         List<Situation> situationList=userService.getSituationsByCnoEno(cno,eno);
         PrintWriter printWriter=response.getWriter();

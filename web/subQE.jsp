@@ -31,7 +31,7 @@
 <form action="${pageContext.request.contextPath}/SubQuestionAndEvaStan" method="POST" enctype="multipart/form-data"
       class="forma">
     <table border="1">
-
+        <input type="text" name="eno" value="${param.eno}" /></td>
         <tr>
             <td>题库上传</td>
             <td><input type="file" name="tk" nullmsg="请选择文件" datatype="*"/></td>

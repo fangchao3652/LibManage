@@ -3,6 +3,7 @@ package edu.lnu.filter;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
@@ -24,7 +25,8 @@ public class EncoderFilter implements  Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("过滤器===========================================");
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        System.out.println("过滤器===================uri==========="+request.getRequestURI());
 
       servletResponse.setCharacterEncoding(encode);
         servletResponse.setContentType("text/html;charset=" + encode); // --解决响应乱码

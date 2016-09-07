@@ -12,6 +12,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.lang.StringUtils;
+import org.apache.poi.ss.formula.functions.Intercept;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,8 +32,7 @@ public class SubQuestionAndEvaStan extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         QuestionService questionService = BasicFactory.getFactory().getService(QuestionService.class);
         EvaluateService evaluateService = BasicFactory.getFactory().getService(EvaluateService.class);
-        //获取eno
-        String eno = request.getParameter("eno");
+
         //上传选择的文件
         try {
             String encode = this.getServletContext().getInitParameter("encode");
@@ -58,7 +59,8 @@ public class SubQuestionAndEvaStan extends HttpServlet {
                     String value = item.getString(encode);
                     paramMap.put(name, value);
                 } else {
-
+                    //获取eno
+                    int eno = Integer.parseInt(paramMap.get("eno").trim());
                     //属性名称
                     String fiedlName = item.getFieldName();// tk :题库  pjbz :评价标准
                     if ("tk".equals(fiedlName) && item.getName() != null && !"".equals(item.getName())) {//题库
@@ -72,15 +74,17 @@ public class SubQuestionAndEvaStan extends HttpServlet {
 
                         for (int i = 1; i < rows; i++) {
                             //第一个是列数，第二个是行数
-                            String id1 = rs.getCell(0, i).getContents();//默认最左边编号也算一列 所以这里得j++
-                            String eno1 = rs.getCell(1, i).getContents();
-                            String quesNUm1 = rs.getCell(2, i).getContents();
-                            String topic1 = rs.getCell(3, i).getContents();
-                            String answer1 = rs.getCell(4, i).getContents();
-                            String options1 = rs.getCell(5, i).getContents();
-
+                            //String id1 = rs.getCell(0, i).getContents();//默认最左边编号也算一列 所以这里得j++
+                            //String eno1 = rs.getCell(0, i).getContents();
+                            String quesNUm1 = rs.getCell(0, i).getContents().trim();
+                            String topic1 = rs.getCell(1, i).getContents();
+                            String answer1 = rs.getCell(2, i).getContents().trim();
+                            String options1 = rs.getCell(3, i).getContents();
+                            if (StringUtils.isEmpty(topic1)) {
+                                continue;
+                            }
                             Question question = new Question();
-                            question.setEno(Integer.parseInt(eno1));
+                            question.setEno(eno);
                             question.setTopic(topic1);
                             question.setQuesNum(Integer.parseInt(quesNUm1));
                             question.setOptions(options1);
@@ -105,13 +109,16 @@ public class SubQuestionAndEvaStan extends HttpServlet {
                         int rows = rs.getRows();//得到所有的行
                         for (int i = 1; i < rows; i++) {
                             //第一个是列数，第二个是行数
-                            String id1 = rs.getCell(0, i).getContents();//默认最左边编号也算一列 所以这里得j++
-                            String eno1 = rs.getCell(1, i).getContents();
-                            String stanDesc1 = rs.getCell(2, i).getContents();
-                            String options1 = rs.getCell(3, i).getContents();
+                            //String id1 = rs.getCell(0, i).getContents();//默认最左边编号也算一列 所以这里得j++
+                            // String eno1 = rs.getCell(0, i).getContents();
+                            String stanDesc1 = rs.getCell(0, i).getContents();
+                            String options1 = rs.getCell(1, i).getContents();
                             EvaluateStandard standard = new EvaluateStandard();
-                            standard.setId(Integer.parseInt(id1));
-                            standard.setEno(Integer.parseInt(eno1));
+                            //standard.setId(Integer.parseInt(id1));
+                            if (StringUtils.isEmpty(stanDesc1)) {
+                                continue;
+                            }
+                            standard.setEno(eno);
                             standard.setStanDesc(stanDesc1);
                             standard.setOptions(options1);
                             standardList.add(standard);
