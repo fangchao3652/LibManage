@@ -15,13 +15,16 @@
     <script type="text/javascript">
         window.onload = function () {
             //    CKEDITOR.replace('code',{toolbarGroups:[{ name: 'insert' }] });   //下面的textarea 不要再写class="ckeditor" 否则会显示两个
+            CKEDITOR.replace('report',{image_previewText:" ",height: 400,filebrowserImageUploadUrl:"UploadImgCKServlet"});
             CKEDITOR.replace('code', {toolbar: [['CodeSnippet']], height: 400});
+
             $(".subform").Validform({
 
                 tiptype: 4
             });
         }
     </script>
+
 
 
     <link rel="stylesheet" href="ckeditor/samples/css/samples.css">
@@ -77,7 +80,7 @@
                 代码：<br>
                 <textarea name="code" id="TextArea1" onpaste="return false;" datatype="*" nullmsg="请插入代码"></textarea>
                 实验报告：<br>
-                <textarea name="report" id="TextArea2" onpaste="return false;" class="ckeditor"  datatype="*" nullmsg="请填写实验报告"></textarea>
+                <textarea name="report" id="TextArea2" onpaste="return false;"   datatype="*" nullmsg="请填写实验报告"></textarea>
                 <br>
                 <input type="submit" value="提	交">
             </form>
