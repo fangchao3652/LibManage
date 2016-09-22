@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <title>结果预览</title>
+    <title>学生成绩</title>
     <%--ckeditor-Begin--%>
     <script src="ckeditor/ckeditor.js"></script>
     <script src="ckeditor/samples/js/sample.js"></script>
@@ -131,10 +131,39 @@
     <td><font color="red">${errmsg }</font></td>
     <input type="hidden" name="sno" value="${score.sno}">
     <input type="hidden" name="eno" value="${score.eno}">
-    预习报告成绩： <input type="text" name="preScore" value="${score.preScore}" datatype="score" errormsg="请填写正确的分数"><br>
-    课上操作成绩： <input type="text" name="evaScore" value="${score.evaScore}" datatype="score" errormsg="请填写正确的分数"><br>
-    实验报告成绩： <input type="text" name="reportScore" value="${score.reportScore}" datatype="score" errormsg="请填写正确的分数"><br>
+    预习报告成绩： <input type="text" name="preScore" id="preScore" value="${score.preScore}" datatype="score" errormsg="请填写正确的分数" onchange="changeScore(this)"><br>
+    课上操作成绩： <input type="text" name="evaScore" id="evaScore"value="${score.evaScore}" datatype="score" errormsg="请填写正确的分数"  onchange="changeScore(this)"><br>
+    实验报告成绩： <input type="text" name="reportScore" id="reportScore" value="${score.reportScore}" datatype="score" errormsg="请填写正确的分数"  onchange="changeScore(this)"><br>
+
+
+    总成绩： <input type="text" name="score" id="score"   datatype="score" errormsg="请填写正确的分数"><br>
     <input type="submit" value="提交">
 </form>
+<script type="text/javascript">
+    $().ready(function () {
+        var preScore=parseInt(document.getElementById("preScore").value);
+        var evaScore=parseInt( document.getElementById("evaScore").value);
+        var reportScore=parseInt(document.getElementById("reportScore").value);
+        var score=(preScore+evaScore+reportScore)/3;
+        score=score.toFixed(2)
+        document.getElementById("score").value=score;
+    });
+
+    function changeScore(obj) {
+        if (isNaN(obj.value)) {
+            alert("必须是数字!");
+
+            return;
+
+        } else {
+            var preScore=parseInt(document.getElementById("preScore").value);
+            var evaScore=parseInt( document.getElementById("evaScore").value);
+            var reportScore=parseInt(document.getElementById("reportScore").value);
+            var score=(preScore+evaScore+reportScore)/3;
+            score=score.toFixed(2)
+            document.getElementById("score").value=score;
+        }
+    }
+</script>
 </body>
 </html>
