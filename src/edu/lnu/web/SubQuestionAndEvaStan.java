@@ -71,7 +71,6 @@ public class SubQuestionAndEvaStan extends HttpServlet {
                         Sheet rs = rwb.getSheet(0);//或者rwb.getSheet(0)
                         int clos = rs.getColumns();//得到所有的列
                         int rows = rs.getRows();//得到所有的行
-
                         for (int i = 1; i < rows; i++) {
                             //第一个是列数，第二个是行数
                             //String id1 = rs.getCell(0, i).getContents();//默认最左边编号也算一列 所以这里得j++
