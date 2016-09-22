@@ -1,10 +1,10 @@
 package edu.lnu.web;
 
 import edu.lnu.domain.Experiment;
-import edu.lnu.domain.User;
 import edu.lnu.factory.BasicFactory;
 import edu.lnu.service.ClassService;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,31 +13,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
-/**select  class  预习过的
- * Created by Meiling on 2016/7/10.
+/** 选择课程后 ajax  获取预置的 table
+ * Created by Meiling on 2016/9/22.
  */
-@WebServlet( "/AjaxServletPred")
-public class AjaxServletPred extends HttpServlet {
+@WebServlet(  "/AjaxServletReportTable")
+public class AjaxServletReportTable extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        ClassService service=BasicFactory.getFactory().getService(ClassService.class);
-       int  cno=Integer.parseInt(request.getParameter("cno"));
-       int  sno= ((User)request.getSession().getAttribute("user")).getSno();
-        List<Experiment> experimentList=service.findExperimentsByCnoPred(sno,cno);//该学生 该cno所对应的所有预习过 的Experiment
-
-        JSONArray jsonArray=JSONArray.fromObject(experimentList);
-        System.out.println("cno:"+cno+"  url:AjaxServletPred=="+jsonArray);
-
-
+        int  eno=Integer.parseInt(request.getParameter("eno"));
+        ClassService classService= BasicFactory.getFactory().getService(ClassService.class);
+        Experiment experiment=classService.findExperimentByEno(eno);
         response.setContentType("application/x-json");//需要设置ContentType 为"application/x-json"
         PrintWriter out = response.getWriter();
-        out.println(jsonArray.toString());//向客户端输出JSONObject字符串
+        JSONObject jsonObject=JSONObject.fromObject(experiment);
+        System.out.println("/AjaxServletReportTable==="+jsonObject);
+        out.println(jsonObject.toString());//向客户端输出JSONObject字符串
         out.flush();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+doPost(request, response);
     }
 }

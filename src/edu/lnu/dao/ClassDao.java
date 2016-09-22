@@ -38,4 +38,11 @@ public interface ClassDao extends Dao {
     List<Experiment> findExperimentsByCnoPred(int sno, int cno);
 
     List<Score> findExperimentsBySnoTime(int sno);
+
+    /**
+    * 根据eno获取单个 Experiment 从而 获取实验报告预置表格html
+     * @param eno
+     * @return
+     */
+    Experiment findExperimentByEno(int eno);
 }

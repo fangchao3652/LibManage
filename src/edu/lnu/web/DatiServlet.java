@@ -24,6 +24,7 @@ public class DatiServlet extends HttpServlet {
          * [{"id":9, "userAnswer":4},{"id":10, "userAnswer":3},{"id":11, "userAnswer":4},{"id":12, "userAnswer":4}]
          */
         String jsonPreResult = request.getParameter("answers");
+        String score2 = request.getParameter("score2");
         //将其存入数据库 preResult 字段
         Score score = new Score();
         int eno = (int) request.getSession().getAttribute("eno");
@@ -32,9 +33,10 @@ public class DatiServlet extends HttpServlet {
         score.setSno(sno);
         score.setEno(eno);
         score.setPreResult(jsonPreResult);
-
-         request.getSession().setAttribute("score",score);
-        //插入一条score 记录 初始化三个字段
+        float fs=Float.parseFloat(score2);
+        score.setPreScore(score2==null?0:fs);
+        request.getSession().setAttribute("score", score);
+        //插入一条score 记录 初始化四个字段
         scoreService.addScore(score);
 
         // String jsonstr=request.getParameter("answers");

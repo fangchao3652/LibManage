@@ -65,4 +65,9 @@ public class ClassServiceImpl implements ClassService {
     public List<Score> findExperimentsBySnoTime(int sno) {
         return classDao.findExperimentsBySnoTime(sno);
     }
+
+    @Override
+    public Experiment findExperimentByEno(int eno) {
+        return classDao.findExperimentByEno(eno);
+    }
 }

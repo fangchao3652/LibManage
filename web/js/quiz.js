@@ -147,15 +147,15 @@
                     collate.push('{"id":' +  parseInt(config.questions[r].id,10) + ', "userAnswer":' + parseInt(userAnswers[r],10) + '}');
                 }
                 var ans='['+collate.join(",")+']';
-                $.ajax({
+              /*  $.ajax({
                     type: 'POST',
                     url: config.sendResultsURL,
-                    data: {answers:ans},
+                    data: {answers:ans,fenshu:score},
                     dataType: "json",
                     success: function() {
                         console.log("OH HAI");
                     }
-                });
+                });*/
             }
             progressKeeper.hide();
             var results = checkAnswers(),
@@ -189,7 +189,15 @@
                 resultSet += '</ul></div></div>';
             }
             score = roundReloaded(trueCount / questionLength * 100, 2);
-            
+            $.ajax({
+                type: 'POST',
+                url: config.sendResultsURL,
+                data: {score2:score,answers:ans},
+                dataType: "json",
+                success: function() {
+                    console.log("OH HAI");
+                }
+            });
             resultSet = '<h2 class="qTitle">' + judgeSkills(score) + '<br/> 您的分数： ' + score + '</h2>' + shareButton + '<div class="jquizzy-clear"></div>' + resultSet + '<div class="jquizzy-clear"></div>';
             superContainer.find('.result-keeper').html(resultSet).show(500);
             superContainer.find('.resultsview-qhover').hide();
@@ -205,5 +213,6 @@
             });
             return false;
         });
+       
     };
 })(jQuery);

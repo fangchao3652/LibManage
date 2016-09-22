@@ -73,6 +73,6 @@
     ${requestScope.report}
 </div>
 <br><br><br>
-
+<a href="${pageContext.request.contextPath}/EditReportServlet">修改</a>
 </body>
 </html>

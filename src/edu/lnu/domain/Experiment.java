@@ -10,6 +10,15 @@ public class Experiment {
     private  int  cno;
     private Timestamp time;
     private String name;
+   private String  tablehtml;
+
+    public String getTablehtml() {
+        return tablehtml;
+    }
+
+    public void setTablehtml(String tablehtml) {
+        this.tablehtml = tablehtml;
+    }
 
     public int getEno() {
         return eno;

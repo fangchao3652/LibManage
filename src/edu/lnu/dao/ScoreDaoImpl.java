@@ -25,10 +25,10 @@ public class ScoreDaoImpl implements ScoreDao {
 
     @Override
     public void addScore(Score score) {
-        String sql = "insert into score(sno,eno,preResult,preStatus) values(?,?,?,1)";
+        String sql = "insert into score(sno,eno,preResult,preScore,preStatus) values(?,?,?,?,1)";
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
-            runner.update(sql, score.getSno(), score.getEno(), score.getPreResult());
+            runner.update(sql, score.getSno(), score.getEno(), score.getPreResult(),score.getPreScore());
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

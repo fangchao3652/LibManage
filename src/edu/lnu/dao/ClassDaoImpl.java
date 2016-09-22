@@ -82,12 +82,23 @@ public class ClassDaoImpl implements ClassDao {
         }
     }
 
+
     @Override
     public List<Class> findClassByTno(int tno) {
         String sql = "select * from class where tno=?";
         try {
             QueryRunner queryRunner = new QueryRunner(TransactionManager.getSource());
             return queryRunner.query(sql, new BeanListHandler<Class>(Class.class), tno);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Override
+    public Experiment findExperimentByEno(int eno) {
+        String sql = "select * from experiment where eno=?";
+        try {
+            QueryRunner queryRunner = new QueryRunner(TransactionManager.getSource());
+            return queryRunner.query(sql, new BeanHandler< >(Experiment.class), eno);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

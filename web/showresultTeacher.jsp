@@ -114,14 +114,19 @@
 
     ${requestScope.score.preReport}
 </div>
+<hr/>
 <div>
     代码：<br><br>
     ${requestScope.score.code}
 </div>
+<hr/>
+
 <div>
     实验报告：<br><br>
     ${requestScope.score.report}
 </div>
+<hr/>
+
 <form action="${pageContext.request.contextPath}/EvaluateServlet" method="post" class="evaform">
     <td><font color="red">${errmsg }</font></td>
     <input type="hidden" name="sno" value="${score.sno}">
