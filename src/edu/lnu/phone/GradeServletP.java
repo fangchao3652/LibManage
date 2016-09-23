@@ -88,6 +88,10 @@ public class GradeServletP extends HttpServlet {
 
             paramMap.put("picture", JSONArray.fromObject(imgurls).toString());
             System.out.println("图片。。。上传完成！");
+            //数据返回
+            response.getWriter().print("1111111111");
+
+
             //picture eno  sno  evaResult
             Score score = new Score();
             BeanUtils.populate(score, paramMap);
@@ -106,4 +110,7 @@ public class GradeServletP extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
+
+
+
 }

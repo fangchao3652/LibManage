@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * 老师从 学生列表跳转过来
@@ -95,5 +96,12 @@ public class ShowResultServletTeacher extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
+    }
+    public static void main(String args[]) throws Exception
+    {
+        Scanner cin=new Scanner(System.in);
+
+        int a=cin.nextInt(),b=cin.nextInt();
+        System.out.println(a+b);
     }
 }

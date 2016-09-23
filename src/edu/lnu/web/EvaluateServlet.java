@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 /**
  * 老师填写成绩 成绩更新
@@ -46,5 +47,12 @@ public class EvaluateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
-
+    public static void main(String[] args) {
+        BigDecimal bigDecimal=new BigDecimal(Double.valueOf(1.12312));
+        Double.valueOf("12");
+                 System.out.println(0.1f);
+                 System.out.println(1.0-0.42);
+                 System.out.println(4.015*100);
+                 System.out.println(303.1/1000);
+             }
 }
