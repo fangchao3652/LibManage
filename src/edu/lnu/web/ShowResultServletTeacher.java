@@ -69,6 +69,7 @@ public class ShowResultServletTeacher extends HttpServlet {
         }
         //处理 评价结果 图片
         if (StringUtils.isNotEmpty(evaResult)) {
+
             JSONArray evaResultArray = JSONArray.fromObject(evaResult);
             List<EvaluateStandard> evaluateStandardList = (List<EvaluateStandard>) JSONArray.toCollection(evaResultArray,EvaluateStandard.class);
             request.setAttribute("evaluateStandardList", evaluateStandardList);//评价

@@ -1,13 +1,11 @@
 package edu.lnu.phone;
 
-import edu.lnu.domain.EvaluateStandard;
-import edu.lnu.domain.Question;
+
 import edu.lnu.domain.Score;
 import edu.lnu.factory.BasicFactory;
 import edu.lnu.service.ScoreService;
 import edu.lnu.util.IOUtils;
-import jxl.Sheet;
-import jxl.Workbook;
+
 import net.sf.json.JSONArray;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
@@ -24,13 +22,13 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-/**
+/**手机 图片上传
  * Created by Meiling on 2016/7/27.
  */
 @WebServlet("/GradeServletP")
 public class GradeServletP extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ScoreService scoreService= BasicFactory.getFactory().getService(ScoreService.class);
+        ScoreService scoreService = BasicFactory.getFactory().getService(ScoreService.class);
         String encode = this.getServletContext().getInitParameter("encode");
         Map<String, String> paramMap = new HashMap<String, String>();
         //1.上传图片
@@ -50,7 +48,7 @@ public class GradeServletP extends HttpServlet {
         List<FileItem> list = null;
         try {
             list = fileUpload.parseRequest(request);
-            List<String> imgurls=new ArrayList<>();
+            List<String> imgurls = new ArrayList<>();
             for (FileItem item : list) {
 
 
@@ -59,46 +57,41 @@ public class GradeServletP extends HttpServlet {
                     String value = item.getString(encode);
                     paramMap.put(name, value);
                 } else {
-
-
                     //文件上传项
                     String realname = item.getName();
-                    int index=realname.lastIndexOf("\\");
-                    if(index!=-1) {
-                        realname=realname.substring(index+1);
+                    int index = realname.lastIndexOf("\\");
+                    if (index != -1) {
+                        realname = realname.substring(index + 1);
                     }
-
-                    String uuidname = UUID.randomUUID().toString()+"_"+realname;
-                    System.out.println("=====uuidname=========> "+uuidname);
+                    String uuidname = UUID.randomUUID().toString() + "_" + realname;
+                    System.out.println("=====uuidname=========> " + uuidname);
                     String hash = Integer.toHexString(uuidname.hashCode());
                     String upload = this.getServletContext().getRealPath("WEB-INF/upload");
                     String imgurl = "/WEB-INF/upload";
-                    for(char c : hash.toCharArray()){
-                        upload+="/"+c;
-                        imgurl+="/"+c;
+                    for (char c : hash.toCharArray()) {
+                        upload += "/" + c;
+                        imgurl += "/" + c;
                     }
-                    imgurl +="/"+uuidname;
-                   // paramMap.put("imgurl", imgurl);
+                    imgurl += "/" + uuidname;
+                    // paramMap.put("imgurl", imgurl);
                     imgurls.add(imgurl);
                     File uploadFile = new File(upload);
-                    if(!uploadFile.exists())
+                    if (!uploadFile.exists())
                         uploadFile.mkdirs();
-
                     InputStream in = item.getInputStream();
-                    OutputStream out = new FileOutputStream(new File(upload,uuidname));
-
+                    OutputStream out = new FileOutputStream(new File(upload, uuidname));
                     IOUtils.In2Out(in, out);
                     IOUtils.close(in, out);
-
                     item.delete();
                 }
             }
 
             paramMap.put("picture", JSONArray.fromObject(imgurls).toString());
             System.out.println("图片。。。上传完成！");
-             //picture eno  sno  evaResult
-            Score score =new Score();
-            BeanUtils.populate(score,paramMap);
+            //picture eno  sno  evaResult
+            Score score = new Score();
+            BeanUtils.populate(score, paramMap);
+            System.out.println(paramMap);
             scoreService.addOrUpdateScore(score);
         } catch (FileUploadException e1) {
             e1.printStackTrace();

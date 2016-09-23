@@ -50,8 +50,8 @@ public class ScoreServiceImpl implements ScoreService {
 
 
     @Override
-    public void updateScore(float preScore, float evaScore, float reportScore, int sno, int eno) {
-        scoreDao.updateScore(preScore,evaScore,reportScore,sno,eno);
+    public void updateScore(float preScore, float evaScore, float reportScore, float score, int sno, int eno) {
+        scoreDao.updateScore(preScore,evaScore,reportScore,score,sno,eno);
     }
 
     @Override

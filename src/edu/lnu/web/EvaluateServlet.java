@@ -27,17 +27,19 @@ public class EvaluateServlet extends HttpServlet {
         float preScore;
         float evaScore;
         float reportScore;
+        float score; //总成绩
         try {
             preScore = Float.parseFloat(request.getParameter("preScore"));//预习成绩
             evaScore = Float.parseFloat(request.getParameter("evaScore"));//课上根据评价标准得出的成绩
             reportScore = Float.parseFloat(request.getParameter("reportScore"));//实验报告的成绩
+            score = Float.parseFloat(request.getParameter("score"));//总成绩
         } catch (Exception e) {
             throw new RuntimeException("分数填写错误，请重新填写");
           /* request.setAttribute("errmsg","分数填写错误，请重新填写");
             request.getRequestDispatcher("/showresultTeacher.jsp").forward(request,response);*/
         }
          //更新成绩表存入这几个成绩
-        scoreService.updateScore(preScore,evaScore,reportScore,sno,eno);
+        scoreService.updateScore(preScore,evaScore,reportScore,score,sno,eno);
         response.sendRedirect(request.getContextPath()+"/StudentListServlet?cno="+request.getSession().getAttribute("cno")+"&eno="+request.getSession().getAttribute("eno"));
     }
 
@@ -45,8 +47,4 @@ public class EvaluateServlet extends HttpServlet {
         doPost(request, response);
     }
 
-    public static void main(String[] args) {
-        float preScore = Float.parseFloat("12fds");
-        System.out.println(preScore);
-    }
 }

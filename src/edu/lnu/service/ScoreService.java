@@ -25,7 +25,7 @@ public interface ScoreService extends Service {
     Score findScoreBySnoEno(int sno, int eno);
 
     @Tran
-    void updateScore(float preScore, float evaScore, float reportScore, int sno, int eno);
+    void updateScore(float preScore, float evaScore, float reportScore, float score, int sno, int eno);
 
     @Tran
     void updateloginStatus(int sno, int eno);

@@ -60,11 +60,11 @@ public class ScoreDaoImpl implements ScoreDao {
     }
 
     @Override
-    public void updateScore(float preScore, float evaScore, float reportScore, int sno, int eno) {
+    public void updateScore(float preScore, float evaScore, float reportScore, float score, int sno, int eno) {
         String sql = "update  score set preScore=?,evaScore =?,reportScore=?,score=?,evaStatus=1 where sno=? and eno=?";
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
-            runner.update(sql, preScore, evaScore, reportScore, (preScore + evaScore + reportScore) / 3, sno, eno);
+            runner.update(sql, preScore, evaScore, reportScore,score, sno, eno);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -85,11 +85,11 @@ public class ScoreDaoImpl implements ScoreDao {
 
     @Override
     public void addScoreByTeacher(Score score) {
-        String sql = "insert into score(sno,eno,evaResult,picture) values(?,?,?,?)";
+        String sql = "insert into score(sno,eno,evaResult,picture,evaScore) values(?,?,?,?,?)";
         try {
 
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
-            runner.update(sql, score.getSno(), score.getEno(), score.getEvaResult(), score.getPicture());
+            runner.update(sql, score.getSno(), score.getEno(), score.getEvaResult(), score.getPicture(),score.getEvaScore());
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -98,10 +98,10 @@ public class ScoreDaoImpl implements ScoreDao {
 
     @Override
     public void updateEvaResultPictures(Score score) {
-        String sql = "update  score set  evaResult=? , picture=? where sno= ? and eno=?";
+        String sql = "update  score set  evaResult=? , picture=?,evaScore=? where sno= ? and eno=?";
         try {
             QueryRunner runner = new QueryRunner(TransactionManager.getSource());
-            runner.update(sql, score.getEvaResult(), score.getPicture(), score.getSno(), score.getEno());
+            runner.update(sql, score.getEvaResult(), score.getPicture(), score.getEvaScore(),score.getSno(), score.getEno());
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
